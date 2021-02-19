@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mr-auto" href="#">CGCL</a>
+
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+
+    <div class="container problem-1">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 1</h2>
+                <a href="https://leetcode.com/problems/gas-station/">Gas Station</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>This is a brute force approch having time complexity
+                of O(n*n).we are starting from that index which give postitve result
+                when we subract gas[i]-cost[i].And after that we are just follow a circluar path.</i>
+               </p>
+            <pre class='brush: cpp'>
+                class Solution {
+                    public:
+                        int canCompleteCircuit(vector&lt;int&gt;& gas, vector&lt;int&gt;& cost) {
+                            int n=gas.size();
+                            vector&lt;int&gt; v(cost.size(),0);
+                            for(int i=0;i&ltcost.size();i++){
+                                v[i]=gas[i]-cost[i];
+                            }
+                            for(int i=0;i&lt;gas.size();i++){
+                                int sum=v[i];
+                                int j=(i+1)%n;
+                                while(sum&gt;0&&j!=i){
+                                    sum=sum+gas[j]-cost[j];
+                                    j++;
+                                    j=j%n;
+                                }
+                                if(j==i&&sum&gt;=0)return i;
+                            }
+                            return -1;
+                        }
+                    };
+                </pre>
+            </div>
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>Time complexity of this approch is O(n).In this we are maintaing
+                    a vector which contains total gas upto that index.The maintaining of 
+                    is necessary for not traversing the previous element again.we just
+                    add the v[index-1]+gas[index]-cost[index] if it is greater than equal to zero
+                    it means from this point we can make a circular path.</i>
+                </p>
+                <pre>
+                    
+                    class Solution {
+                        public:
+                            int canCompleteCircuit(vector&lt;int&gt;& gas, vector&lt;int&gt;& cost) {
+                                int n=gas.size();
+                                int required_gas=0;
+                                int total_gas=0;
+                                int index=0;
+                                vector&lt;int&gt; v(n,0);
+                                v[0]=gas[0]-cost[0];
+                                for(int i=0;i&lt;gas.size();i++){
+                                    required_gas=required_gas+gas[i]-cost[i];
+                                    if(required_gas&lt;0){
+                                        index=i+1;
+                                      
+                                        //the poin behind this can not take part //because they did not have sufficient gas to reach
+                                        required_gas=0;
+                                        
+                                    }
+                                    if(i&gt;=1)
+                                    v[i]=v[i-1]+gas[i]-cost[i];
+                                    
+                                }
+                                if(index==0&&required_gas&gt;=0)return index;
+                                if(v[index-1]+required_gas&gt;=0)return index;
+                                
+                                return -1;
+                            }
+                        };
+                </pre>
+            </div>
+        </div> 
+    </div>
+    <div class="container problem-2">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 2</h2>
+                <a href="https://leetcode.com/problems/shuffle-the-array/">Shuffel the array</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>This is a simple question in which given 2n elements.
+                    so we simply divide go to nth element and then add one 
+                    element in vector from starting and one from the nth position.</i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        vector&lt;int&gt; shuffle(vector&lt;int&gt;& nums, int n) {
+                            
+                            int k=nums.size();
+                            int j=k/2;
+                            int aptr=0;
+                            int bptr=j;
+                            int m=0;
+                           /* while(i&lt;(k-2)){
+                                swap(nums,i,j);
+                                i++;
+                                if(i==j)
+                                    j++;
+                                
+                            }*/
+                            vector&lt;int&gt; v=nums;
+                            while(aptr&lt;j&&bptr&lt;2*n){
+                                v[m++]=nums[aptr++];
+                                v[m++]=nums[bptr++];
+                                
+                            }
+                            return v;
+                        }
+                    
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>This solution take less time as compared to first.The concept of both is 
+                    same.First we adding starting element then we adding the element at the nth position.</i>
+                </p>
+                <pre>
+                    class Solution {
+                        public:
+                            vector&lt;int&gt; shuffle(vector&lt;int&gt;& nums, int n) {
+                                vector&lt;int&gt; ans;
+                                for(int i=0;i&lt;n;i++){
+                                    ans.push_back(nums[i]);
+                                    ans.push_back(nums[i+n]);
+                                }
+                                return ans;
+                            }
+                        };
+                </pre>
+            </div>
+         
+
+    </div>
+    <div class="container problem-3">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 3</h2>
+                <a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/">Binary Tree Level Order Traversal II</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>This is a simple question in which we simply do level order traversing and then 
+                    reverse the vector</i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        vector&lt;vector&lt;int&gt;&gt; levelOrderBottom(TreeNode* root) {
+                            vector&lt;vector&lt;int&gt;&gt; vec;
+                            queue&lt;TreeNode*&gt; v;
+                           // int i=0;
+                            if(!root)
+                                return vec;
+                            
+                            v.push(root);
+                            while(!v.empty()){
+                                 vector&lt;int&gt; v1;
+                                int s=v.size();
+                                while(s--){
+                                   
+                                
+                                    TreeNode* node=v.front();
+                                    v.pop();
+                                    //int data=node-&gt;val
+                                    v1.push_back(node-&gt;val);
+                                    if(node-&gt;left!=NULL)
+                                        v.push(node-&gt;left);
+                                    if(node-&gt;right!=NULL)
+                                        v.push(node-&gt;right);
+                                }
+                                vec.push_back(v1);
+                            }
+                            reverse(vec.begin(),vec.end());
+                            return vec;
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>This solution take less time as compared to first.The concept of both is 
+                    same.In this we use null pointer which reduce the time complexity.</i>
+                </p>
+                <pre>
+                    class Solution {
+                        public:
+                            vector&lt;vector&lt;int&gt;&gt; levelOrderBottom(TreeNode* root) 
+                            {
+                                queue&lt;TreeNode *&gt; q;
+                            vector&lt;vector&lt;int&gt;&gt; result;
+                            vector&lt;int&gt; arr;
+                                if(root==NULL)
+                                    return result;
+                                q.push(root);
+                                q.push(NULL);
+                                while(!q.empty())
+                                {
+                                    TreeNode *t=q.front();
+                                    q.pop();
+                                    
+                                    if(t==NULL)
+                                    {
+                                        result.push_back(arr);
+                                        arr.resize(0);
+                                        if(q.size()&gt;0)
+                                            q.push(NULL);
+                                        
+                                    }
+                                    else
+                                    {
+                                     arr.push_back(t-&gt;val) ;
+                                     if(t-&gt;left!=NULL) q.push(t-&gt;left);
+                                     if(t-&gt;right!=NULL) q.push(t-&gt;right);
+                                        
+                                    }
+                                }
+                                reverse(result.begin(),result.end());
+                                return result;
+                                
+                                
+                            }
+                        };
+                </pre>
+            </div>
+         
+
+    </div>
+    <div class="container problem-4">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 4</h2>
+                <a href="https://leetcode.com/problems/prison-cells-after-n-days/">Prison Cells After N Days</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>so the 0th index and n-1 index remaining zero because they do not
+                    have any neighbours and for the inner elments we have to check
+                    (i-1)th and (i+1)th element.if they are same then ith element will 
+                    be 1 else 0;</i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        vector&lt;int&gt; prisonAfterNDays(vector&lt;int&gt;& cells, int N) {
+                          map&lt;string,int&gt; mp;
+                            vector&lt;int&gt; temp=cells;
+                            int cycle=0;
+                             
+                            
+                            while(1){
+                                 for(int i=0;i&lt;cells.size();i++){
+                                if(i==0||i==(cells.size()-1))
+                                    temp[i]=0;
+                                else if((cells[i-1]==1&&cells[i+1]==1)||(cells[i-1]==0&&cells[i+1]==0))
+                                    temp[i]=1;
+                                else
+                                    temp[i]=0;
+                                     
+                                 }
+                                
+                                string str="";
+                                for(int i=0;i&lt;cells.size();i++){
+                                    str=str+to_string(temp[i]);
+                                }
+                                
+                               
+                               
+                                if(mp.find(str)!=mp.end())
+                                         break;
+                                else
+                                {
+                                    cells=temp;
+                                    mp[str]++;
+                                    cycle++;
+                                }
+                                
+                                
+                            }
+                            N=N%cycle;
+                            while(N--){
+                                for(int i=0;i&lt;cells.size();i++){
+                                if(i==0||i==(cells.size()-1))
+                                    temp[i]=0;
+                                else if((cells[i-1]==1&&cells[i+1]==1)||(cells[i-1]==0&&cells[i+1]==0))
+                                    temp[i]=1;
+                                else
+                                    temp[i]=0;
+                                
+                                
+                            }
+                                cells=temp;
+                            }
+                            return cells;
+                        }
+                    };
+                 </pre>
+             </div>
+            
+         
+     </div>
+    </div>
+    
+    <div class="container problem-5">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 5</h2>
+                <a href="https://leetcode.com/problems/3sum/">3Sum</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>First we have to sort the vector.after that we are considering the three position 
+                    one is always point to the i-th index(as loop works) and second is always started from (i+1)th and 
+                    third always started from last index.
+                    when the array is sorted the small values always comes first.
+                    so when we add all the three pointer and if we get answer less than 0.
+                    it means we are negative values so we have to move the second pointer towards
+                    the ending point.and vice versa if we get value greater than 0 it means we are 
+                    adding greater valuse.so we have to move the third pointer towards the second pointer.
+                    when they pass each other it means we are done with ith index and now its time to go
+                    further.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;& nums) {
+                            int i=0;
+                            int n;
+                            int k;
+                            int size=nums.size();
+                            vector&lt;int&gt; v;
+                            vector&lt;vector&lt;int&gt;&gt; vec;
+                            map&lt;vector&lt;int&gt;,int&gt; mp;
+                            sort(nums.begin(),nums.end());
+                            while(i&lt;(size-2)){
+                                n=i+1;
+                                k=nums.size()-1;
+                                while(n&lt;k){
+                                    if(nums[i]+nums[n]+nums[k]&lt;0)
+                                        n++;
+                                    else if(nums[i]+nums[n]+nums[k]&gt;0)
+                                        k--;
+                                    else{
+                                        v.push_back(nums[i]);
+                                        v.push_back(nums[n]);
+                                        v.push_back(nums[k]);
+                                        
+                                        if(mp.find(v)==mp.end()){
+                                        vec.push_back(v);
+                                            mp[v]++;}
+                                        v.clear();
+                                        n++;
+                                        k--;
+                                    }
+                                }
+                                i++;
+                            }
+                            return vec;
+                        }
+                    };
+                 </pre>
+             </div>
+             
+    </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-8 col-sm-4 align-self-center">
+                    <div >
+                        <a href="http://google.com/+">Google+</a>
+                        <a href="http://www.facebook.com/profile.php?id=">Facebook</a>
+                        <a href="http://www.linkedin.com/in/">LinkedIn</a>
+                        <a href="http://twitter.com/">Twitter</a>
+                        <a href="http://youtube.com/">YouTube</a>
+                        <a href="mailto:">Mail</a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 make with love</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+</body>
+
+</html> 
