@@ -195,7 +195,7 @@
                 </pre>
             </div>
          
-
+    </div>
     </div>
     <div class="container problem-3">
         <div class="row ">
@@ -293,7 +293,7 @@
                 </pre>
             </div>
          
-
+    </div>
     </div>
     <div class="container problem-4">
         <div class="row ">
@@ -440,6 +440,7 @@
              </div>
              
     </div>
+    </div>
     <div class="container problem-6">
         <div class="row ">
             <div class="col-12 col-sm-6">
@@ -493,6 +494,7 @@
                  </pre>
              </div>
              
+    </div>
     </div>
     
     <div class="container problem-7">
@@ -592,7 +594,7 @@
                 </pre>
             </div>
          
-
+    </div>
     </div>
     
     <div class="container problem-8">
@@ -682,7 +684,123 @@
                 </pre>
             </div>
          
-
+    </div>
+    </div>
+    
+    <div class="container problem-9">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 9</h2>
+                <a href="https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/">Vertical Order Traversal of a Binary Tree</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>we have to do vertical order traversal of the tree.The main point here is that we have
+                    to sort vertical order according to their level.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void traverse(TreeNode  *root,map&lt;int,vector&lt;pair&lt;int,int&gt;&gt;&gt; &mp,int index,int level){
+                            if(root==NULL)return ;
+                            
+                            mp[index].push_back({level,root-&gt;val});
+                            traverse(root-&gt;left,mp,index-1,level+1);
+                            traverse(root-&gt;right,mp,index+1,level+1);
+                            return ;
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; verticalTraversal(TreeNode* root) {
+                            if(root==NULL)return {{}};
+                            vector&lt;vector&lt;int&gt;&gt; vec;
+                            vector&lt;int&gt; v;
+                            map&lt;int,vector&lt;pair&lt;int,int&gt;&gt;&gt; mp;
+                            traverse(root,mp,0,0);
+                            for(auto itr=mp.begin();itr!=mp.end();itr++){
+                               sort(itr-&gt;second.begin(),itr-&gt;second.end());
+                               for(auto it=itr-&gt;second.begin();it!=itr-&gt;second.end();it++){
+                                   v.push_back(it-&gt;second);
+                               }
+                                vec.push_back(v);
+                                v.clear();
+                            }
+                            return vec;
+                        }
+                    };
+                 </pre>
+             </div>
+             </div>
+         
+    </div>
+    <div class="container problem-10">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 10</h2>
+                <a href="https://leetcode.com/problems/find-all-duplicates-in-an-array/">Find All Duplicates in an Array</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>A big hint is given in the question.Question says the value of nums is lies between
+                    (1 ≤ a[i] ≤ n ).so we use the value of arr as index.if u make closer look to the arr u find that whenever 
+                    a same element appears again then a circular loop is formed.so this is best approch for solving this question.
+                    so we use a loop from i=0 to i=nums.size() the index that are traversing through loop become 0 that is not
+                    visited before.And the indexes that is visited through circular loop they become negative.
+                    so the concept is simple whenever we find an index with index value -1.it means we are traversing it again.
+                    so their is element that take us to same index again .so this is the element that is twice in the array.
+                    Flag is used in the approch if somehow we are traversing the element that is traverse by the loop.we make that index
+                    negative and flag become true.because their is no benefit to move further because the for loop traversed it already.
+                </i>
+                </p>
+             <pre>
+                 class Solution {
+                public:
+                    vector&lt;int&gt; findDuplicates(vector&lt;int&gt;& nums) {
+                        int n=nums.size();
+                        vector&lt;int&gt; v;
+                        for(int i=0;i&lt;n;i++){
+                            if(nums[i]!=-1&&nums[i]!=0){
+                                int j=nums[i];
+                                 nums[i]=0;
+                                bool flag=false;
+                                while(nums[j-1]!=-1){
+                                    if(nums[j-1]==0){
+                                        nums[j-1]=-1;
+                                        flag=true;
+                                        break;
+                                    }
+                                    int t=nums[j-1];
+                                    nums[j-1]=-1;
+                                    j=t;
+                                }
+                                if(!flag)
+                                    v.push_back(j);
+                            }
+                           
+                        }
+                        return v;
+                    }
+                };
+                 </pre>
+             </div>
+             </div>
+         
+    </div>
+    <div class="container">
+         <div class="row justify-content-end">
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode2.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+             </div>
+             
+            
+         </div>
     </div>
 
 
