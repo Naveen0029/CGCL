@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mr-auto" href="#">CGCL</a>
+
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+ 
+    <div class="fluid-container problems sticky-top sticky-offset">
+        <div class="row">
+            
+            <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-10" class="btn  btn-lg" role="button" aria-disabled="true">Find All Duplicates in an Array</a>
+               <a style="color:white;" href="#problem-11" class="btn  btn-lg" role="button" aria-disabled="true">Pascal's Triangle II</a>
+               <a style="color:white;" href="#problem-12" class="btn  btn-lg" role="button" aria-disabled="true">Maximum Depth of Binary Tree</a>
+               <a style="color:white;" href="#problem-13" class="btn  btn-lg" role="button" aria-disabled="true">Longest Palindrome</a>
+            
+               
+            </div>
+            
+            <div class="col-12 col-sm-2">
+               <a style="color:white;" href="./leetcode2.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a>     
+               <a style="color:white;" href="./leetcode4.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>     
+            </div>  
+        </div>
+
+    </div>
+    <div id="problem-10" class="container problem-10">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 10</h2>
+                <a href="https://leetcode.com/problems/find-all-duplicates-in-an-array/">Find All Duplicates in an Array</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>A big hint is given in the question.Question says the value of nums is lies between
+                    (1 ≤ a[i] ≤ n ).so we use the value of arr as index.if u make closer look to the arr u find that whenever 
+                    a same element appears again then a circular loop is formed.so this is best approch for solving this question.
+                    so we use a loop from i=0 to i=nums.size() the index that are traversing through loop become 0 that is not
+                    visited before.And the indexes that is visited through circular loop they become negative.
+                    so the concept is simple whenever we find an index with index value -1.it means we are traversing it again.
+                    so their is element that take us to same index again .so this is the element that is twice in the array.
+                    Flag is used in the approch if somehow we are traversing the element that is traverse by the loop.we make that index
+                    negative and flag become true.because their is no benefit to move further because the for loop traversed it already.
+                </i>
+                </p>
+             <pre>
+                 class Solution {
+                public:
+                    vector&lt;int&gt; findDuplicates(vector&lt;int&gt;& nums) {
+                        int n=nums.size();
+                        vector&lt;int&gt; v;
+                        for(int i=0;i&lt;n;i++){
+                            if(nums[i]!=-1&&nums[i]!=0){
+                                int j=nums[i];
+                                 nums[i]=0;
+                                bool flag=false;
+                                while(nums[j-1]!=-1){
+                                    if(nums[j-1]==0){
+                                        nums[j-1]=-1;
+                                        flag=true;
+                                        break;
+                                    }
+                                    int t=nums[j-1];
+                                    nums[j-1]=-1;
+                                    j=t;
+                                }
+                                if(!flag)
+                                    v.push_back(j);
+                            }
+                           
+                        }
+                        return v;
+                    }
+                };
+                 </pre>
+             </div>
+             </div>
+         
+    </div>
+   
+    <div id="problem-11" class="container problem-11">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 11</h2>
+                <a href="https://leetcode.com/problems/pascals-triangle-ii/">Pascal's Triangle II</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>use 2d array and to find arr[i][j] we have to add arr[i-1][j-1]+arr[i-1][j].</i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        vector&lt;int&gt; getRow(int rowIndex) {
+                            
+                            vector&lt;int&gt; vec;
+                            int n=rowIndex;
+                            int v[n+1][n+1];
+                        
+                            for(int i=0;i&lt;=n;i++){
+                                for(int j=0;j&lt;=n;j++){
+                                    if(j==0)
+                                        v[i][0]=1;
+                                    else
+                                        v[i][j]=0;
+                                }
+                            }
+                            
+                            for(int i=1;i&lt;=n;i++){
+                                for(int j=1;j&lt;=i;j++){
+                                    v[i][j]=v[i-1][j-1]+v[i-1][j];
+                                }
+                            }
+                            
+                            for(int j=0;j&lt;=n;j++){
+                                vec.push_back(v[n][j]);
+                            }
+                            
+                            return vec;
+                            
+                        }
+                    };
+                </pre>
+            </div>
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>This approch uses two 1d array.</i>
+                </p>
+                <pre>
+                    class Solution {
+                        public:
+                            vector&lt;int&gt; getRow(int rowIndex) {
+                               if(rowIndex==0)return {1};
+                                else if(rowIndex==1)return {1,1};
+                                
+                                vector&lt;int&gt; dp(rowIndex+1,1);
+                                vector&lt;int&gt; temp(rowIndex+1,1);
+                                int i=2;
+                                while(i&lt;=rowIndex){
+                                    for(int j=1;j&lt;i;j++){
+                                        temp[j]=dp[j]+dp[j-1];
+                                    }
+                                    dp=temp;
+                                    i++;
+                                }
+                                return dp;
+                            }
+                        };
+                </pre>
+            </div>
+        </div> 
+    </div>
+    <div id="problem-12" class="container problem-12">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 12</h2>
+                <a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/"> Maximum Depth of Binary Tree</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>we use dfs(depth first traversal) approch</i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        int maxDepth(TreeNode* root) {
+                            if(root==NULL)
+                                return 0;
+                           
+                            
+                         int   ldepth=maxDepth(root-&gt;left);
+                          int  rdepth=maxDepth(root-&gt;right);
+                            
+                             if(ldepth&gt;=rdepth)
+                                return ldepth+1;
+                            else
+                                return rdepth+1;
+                            
+                            
+                        }
+                    };
+                </pre>
+            </div>
+           
+        </div> 
+    </div>
+    <div id="problem-13" class="container problem-13">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 13</h2>
+                <a href="https://leetcode.com/problems/longest-palindrome/">Longest Palindrome</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>First we count the alphabets using map and the second thing is count the total number of
+                   even alphabet and if we get the odd number of alphabet then first we check the previous odd value is less than the current odd value.if the prev odd value is less than the current odd value then we make the previous odd value even and add it to our final answer and initialize the Odd_val to the current odd val.else if the current odd value is not greater than the previous odd value then we simply add the even value of this odd number (odd-1).
+               </i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        int longestPalindrome(string s) {
+                            if(s.size()==0)return 0;
+                            int count=0,odd_val=INT_MIN;
+                            
+                            map&lt;char,int&gt; mp;
+                            for(int i=0;i&lt;s.size();i++){
+                                mp[s[i]]++;
+                            }
+                            for(auto itr=mp.begin();itr!=mp.end();itr++){
+                                if(itr-&gt;second%2==0){
+                                    count+=itr-&gt;second;
+                                }
+                                else{
+                                    if(odd_val&lt;itr-&gt;second){
+                                        if(odd_val!=INT_MIN)count+=odd_val-1;
+                                        
+                                         odd_val=itr-&gt;second;
+                                         }
+                                    else
+                                        if(itr-&gt;second&gt;0)count+=itr-&gt;second-1;
+                                          
+                                }
+                            }
+                            if(odd_val!=INT_MIN)
+                            return count+odd_val;
+                            
+                            return count;
+                        }
+                    };
+                </pre>
+            </div>
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>The concept is same.we first always add the even number of odd value.
+                    itr.second/2 is odd or even. but by multiplying it with 2 we make even.
+                    why we are using itr.second/2 because it gives the same answer for 7 and 6 like 
+                    number .so what is going here?it means we are considering only even part of the number.
+                    so when our answer is even and itr.second is odd then we can increase ans by 1.because particluar number is odd and ans can be divided into two prats.
+                    even odd even  is palindrome.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int longestPalindrome(string s) {
+                            map&lt;char,int&gt; mp;
+                            
+                            for(int i=0;i&lt;s.length();i++){
+                                mp[s[i]]++;
+                            }
+                            
+                            int ans=0;
+                            for(auto itr=mp.begin();itr!=mp.end();itr++){
+                                ans+=itr-&gt;second/2*2;
+                                if(ans%2==0&&itr-&gt;second%2==1)
+                                    ans++;
+                            }
+                            return ans;
+                        }
+                    };
+                 </pre>
+             </div>
+           
+        </div> 
+    </div>
+    <div class="container">
+         <div class="row justify-content-between">
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode2.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+             </div>
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode4.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+             </div>
+            
+         </div>
+    </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-8 col-sm-4 align-self-center">
+                    <div >
+                        <a href="http://google.com/+">Google+</a>
+                        <a href="http://www.facebook.com/profile.php?id=">Facebook</a>
+                        <a href="http://www.linkedin.com/in/">LinkedIn</a>
+                        <a href="http://twitter.com/">Twitter</a>
+                        <a href="http://youtube.com/">YouTube</a>
+                        <a href="mailto:">Mail</a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 make with love</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+</body>
+
+</html> 

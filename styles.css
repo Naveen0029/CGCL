@@ -28,3 +28,15 @@
 pre{
  background-color: aquamarine;
 }
+.problems{
+    background-color: rgb(78, 75, 75);
+    margin-top:-3px;
+    
+}
+
+  .sticky-offset{
+      top:56px;
+  }
+  .problems a{
+      display: inline;
+  }

@@ -20,7 +20,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand mr-auto" href="#">CGCL</a>
+           
 
             <div class="collapse navbar-collapse " id="Navbar">
             <ul class="navbar-nav ml-auto">
@@ -34,7 +34,7 @@
         </div>
        </nav>
     <header class="jumbotron">
-        <div class="container">
+        <div class="fluid-container">
             <div class="row row-header">
                 <div class="col-12 col-sm-6">
                     <h1>CGCL</h1>
@@ -47,216 +47,333 @@
 
     </header>
     </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-6" class="btn  btn-lg" role="button" aria-disabled="true">Flatten a Multilevel Doubly Linked List</a>
+                <a style="color:white;" href="#problem-7" class="btn  btn-lg" role="button" aria-disabled="true">Detect Capital</a>
+                <a style="color:white;" href="#problem-8" class="btn  btn-lg" role="button" aria-disabled="true">Design HashSet</a>
+                <a style="color:white;" href="#problem-9" class="btn  btn-lg" role="button" aria-disabled="true">Vertical Order Traversal of a Binary Tree</a>
+              
+                
+             </div>
+             
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a>     
+                <a style="color:white;" href="./leetcode3.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>     
+             </div>  
+         </div>
 
-    <div class="container problem-11">
+     </div>
+     
+    <div id="problem-6" class="container problem-6">
         <div class="row ">
             <div class="col-12 col-sm-6">
-                <h2>Problem 11</h2>
-                <a href="https://leetcode.com/problems/pascals-triangle-ii/">Pascal's Triangle II</a><br>
+                <h2>Problem 6</h2>
+                <a href="https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/">Flatten a Multilevel Doubly Linked List</a><br>
                 
             </div>
                
-        </div>      
+        </div>
         <div class="row">
-           <div class="col-12 col-sm-6">
-               <h3>Algorithm</h3>
-               <p><i>use 2d array and to find arr[i][j] we have to add arr[i-1][j-1]+arr[i-1][j].</i>
-               </p>
-            <pre>
-                class Solution {
-                    public:
-                        vector&lt;int&gt; getRow(int rowIndex) {
-                            
-                            vector&lt;int&gt; vec;
-                            int n=rowIndex;
-                            int v[n+1][n+1];
-                        
-                            for(int i=0;i&lt;=n;i++){
-                                for(int j=0;j&lt;=n;j++){
-                                    if(j==0)
-                                        v[i][0]=1;
-                                    else
-                                        v[i][j]=0;
-                                }
-                            }
-                            
-                            for(int i=1;i&lt;=n;i++){
-                                for(int j=1;j&lt;=i;j++){
-                                    v[i][j]=v[i-1][j-1]+v[i-1][j];
-                                }
-                            }
-                            
-                            for(int j=0;j&lt;=n;j++){
-                                vec.push_back(v[n][j]);
-                            }
-                            
-                            return vec;
-                            
-                        }
-                    };
-                </pre>
-            </div>
-            <div class="col-12 col-sm-6">
-                <h3>Algorithm </h3>
-                <p><i>This approch uses two 1d array.</i>
-                </p>
-                <pre>
-                    class Solution {
-                        public:
-                            vector&lt;int&gt; getRow(int rowIndex) {
-                               if(rowIndex==0)return {1};
-                                else if(rowIndex==1)return {1,1};
-                                
-                                vector&lt;int&gt; dp(rowIndex+1,1);
-                                vector&lt;int&gt; temp(rowIndex+1,1);
-                                int i=2;
-                                while(i&lt;=rowIndex){
-                                    for(int j=1;j&lt;i;j++){
-                                        temp[j]=dp[j]+dp[j-1];
-                                    }
-                                    dp=temp;
-                                    i++;
-                                }
-                                return dp;
-                            }
-                        };
-                </pre>
-            </div>
-        </div> 
-    </div>
-    <div class="container problem-12">
-        <div class="row ">
-            <div class="col-12 col-sm-6">
-                <h2>Problem 12</h2>
-                <a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/"> Maximum Depth of Binary Tree</a><br>
-                
-            </div>
-               
-        </div>      
-        <div class="row">
-           <div class="col-12 col-sm-6">
-               <h3>Algorithm</h3>
-               <p><i>we use dfs(depth first traversal) approch</i>
-               </p>
-            <pre>
-                class Solution {
-                    public:
-                        int maxDepth(TreeNode* root) {
-                            if(root==NULL)
-                                return 0;
-                           
-                            
-                         int   ldepth=maxDepth(root-&gt;left);
-                          int  rdepth=maxDepth(root-&gt;right);
-                            
-                             if(ldepth&gt;=rdepth)
-                                return ldepth+1;
-                            else
-                                return rdepth+1;
-                            
-                            
-                        }
-                    };
-                </pre>
-            </div>
-           
-        </div> 
-    </div>
-    <div class="container problem-13">
-        <div class="row ">
-            <div class="col-12 col-sm-6">
-                <h2>Problem 13</h2>
-                <a href="https://leetcode.com/problems/longest-palindrome/">Longest Palindrome</a><br>
-                
-            </div>
-               
-        </div>      
-        <div class="row">
-           <div class="col-12 col-sm-6">
-               <h3>Algorithm</h3>
-               <p><i>First we count the alphabets using map and the second thing is count the total number of
-                   even alphabet and if we get the odd number of alphabet then first we check the previous odd value is less than the current odd value.if the prev odd value is less than the current odd value then we make the previous odd value even and add it to our final answer and initialize the Odd_val to the current odd val.else if the current odd value is not greater than the previous odd value then we simply add the even value of this odd number (odd-1).
-               </i>
-               </p>
-            <pre>
-                class Solution {
-                    public:
-                        int longestPalindrome(string s) {
-                            if(s.size()==0)return 0;
-                            int count=0,odd_val=INT_MIN;
-                            
-                            map&lt;char,int&gt; mp;
-                            for(int i=0;i&lt;s.size();i++){
-                                mp[s[i]]++;
-                            }
-                            for(auto itr=mp.begin();itr!=mp.end();itr++){
-                                if(itr-&gt;second%2==0){
-                                    count+=itr-&gt;second;
-                                }
-                                else{
-                                    if(odd_val&lt;itr-&gt;second){
-                                        if(odd_val!=INT_MIN)count+=odd_val-1;
-                                        
-                                         odd_val=itr-&gt;second;
-                                         }
-                                    else
-                                        if(itr-&gt;second&gt;0)count+=itr-&gt;second-1;
-                                          
-                                }
-                            }
-                            if(odd_val!=INT_MIN)
-                            return count+odd_val;
-                            
-                            return count;
-                        }
-                    };
-                </pre>
-            </div>
             <div class="col-12 col-sm-6">
                 <h3>Algorithm</h3>
-                <p><i>The concept is same.we first always add the even number of odd value.
-                    itr.second/2 is odd or even. but by multiplying it with 2 we make even.
-                    why we are using itr.second/2 because it gives the same answer for 7 and 6 like 
-                    number .so what is going here?it means we are considering only even part of the number.
-                    so when our answer is even and itr.second is odd then we can increase ans by 1.because particluar number is odd and ans can be divided into two prats.
-                    even odd even  is palindrome.
+                <p><i>we traverse the list from head.whenever we get the node whose child is not equal to NULL.we 
+                    traverse the child avoiding going further.Doing this we go always to the last element of that child
+                    then we return the last node always.Then we make the lastNode=head-&gt;next.
                 </i>
                 </p>
              <pre>
                 class Solution {
                     public:
-                        int longestPalindrome(string s) {
-                            map&lt;char,int&gt; mp;
+                        Node * flatten1(Node *head){
+                              if(head==NULL)return head;
+                            if(head-&gt;next==NULL&&head-&gt;child==NULL)return head; 
                             
-                            for(int i=0;i&lt;s.length();i++){
-                                mp[s[i]]++;
+                            if(head-&gt;child){
+                                Node *temp=flatten1(head-&gt;child);
+                                temp-&gt;next=head-&gt;next;
+                                if(head-&gt;next)head-&gt;next-&gt;prev=temp;
+                                head-&gt;next=head-&gt;child;
+                                if(head-&gt;child)head-&gt;child-&gt;prev=head;
+                                head-&gt;child=NULL;
+                                
+                               if(temp-&gt;next!=NULL)
+                                return flatten1(temp-&gt;next);
                             }
+                           
+                            return flatten1(head-&gt;next);
                             
-                            int ans=0;
-                            for(auto itr=mp.begin();itr!=mp.end();itr++){
-                                ans+=itr-&gt;second/2*2;
-                                if(ans%2==0&&itr-&gt;second%2==1)
-                                    ans++;
-                            }
-                            return ans;
+                          
+                        }
+                        Node* flatten(Node* head) {
+                            if(head==NULL)return head;
+                            if(head-&gt;next==NULL&&!head-&gt;child)return head;
+                            
+                            
+                            flatten1(head);
+                            return head;
+                           
                         }
                     };
                  </pre>
              </div>
-           
-        </div> 
+             
+    </div>
+    </div>
+    
+    <div id="problem-7" class="container problem-7">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 7</h2>
+                <a href="https://leetcode.com/problems/detect-capital/">Detect Capital</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>We have to consider the 0th and 1st index.If they both are uppercase then we have to check
+                    that the rest must be greater.And if first is uppercase and second is lowercase then the rest 
+                    must be lowercase.
+                    If first is lowercase then rest must be lowercase.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        bool Greater(string word){
+                            if(word.size()==0)return true;
+                            
+                            int i=0;
+                            if(word[i]&gt;='A'&&word[i]&lt;='Z'&&Greater(word.substr(i+1)))
+                            return true;
+                            else return false;
+                                
+                        }
+                         bool Smaller(string word){
+                            if(word.size()==0)return true;
+                            
+                            int i=0;
+                            if(word[i]&gt;='a'&&word[i]&lt;='z'&&Smaller(word.substr(i+1)))
+                            return true;
+                            else return false;
+                                
+                        }
+                        bool detectCapitalUse(string word) {
+                            if(word.size()==0||word.size()==1)return true;
+                            
+                            if(word[0]&gt;='A'&&word[0]&lt;='Z'){
+                                if(word[1]&gt;='A'&&word[1]&lt;='Z')return Greater(word.substr(2));
+                                else return Smaller(word.substr(2));
+                                
+                            }
+                            else return Smaller(word.substr(1));
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>The concept is same but this solution is not using recursive approch</i>
+                </p>
+                <pre>
+                    class Solution {
+                        public:
+                            bool detectCapitalUse(string word) {
+                                int n=word.length();
+                                int i;
+                                bool flag=false;
+                                if(n==1)
+                                    return true;
+                                
+                                for(i=0;i&lt;n;i++){
+                                    if(isupper(word[i])){
+                                        
+                                        flag=true;
+                                    }
+                                    else{
+                                        flag=false;
+                                        break;
+                                    }
+                                }
+                                if(flag==true)
+                                    return flag;
+                                else
+                                    i=1;
+                                
+                                while(i&lt;n){
+                                    if(islower(word[i])){
+                                        i++;
+                                        flag=true;
+                                    }
+                                    else {
+                                        flag=false;
+                                        break;
+                                    }
+                                }
+                                return flag;
+                            }
+                        };
+                </pre>
+            </div>
+         
+    </div>
+    </div>
+    
+    <div id="problem-8" class="container problem-8">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 8</h2>
+                <a href="https://leetcode.com/problems/design-hashset/">Design HashSet</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>we are using a vector which is containing list.Because the hash value of two numbers can 
+                    be same.2%5=2 and 7%5=2 so we are using list.
+                </i>
+                </p>
+             <pre>
+                class MyHashSet {
+                    int prime;
+                        vector&lt;list&lt;int&gt;&gt; table;
+                    
+                        int hash(int key) {
+                            return key % prime;
+                        }
+                    
+                        list&lt;int&gt;::iterator search(int key) {
+                            int h = hash(key);
+                            return find(table[h].begin(), table[h].end(), key);
+                        }
+                    
+                    public:
+                        MyHashSet() : prime(10000), table(prime) {}
+                        
+                        void add(int key) {
+                            int h = hash(key);
+                            if (!contains(key))
+                                table[h].push_back(key);
+                        }
+                        
+                        void remove(int key) {
+                            int h = hash(key);
+                            auto it = search(key);
+                            if (it != table[h].end())
+                                table[h].erase(it);
+                        }
+                        
+                        bool contains(int key) {
+                            int h = hash(key);
+                            return search(key) != table[h].end();
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>First approch is better than this because the space complexity is high in this approch as 
+                    compared to first one.
+                </i>
+                </p>
+                <pre>
+                    class MyHashSet {
+                        public:
+                            /** Initialize your data structure here. */
+                            int n;
+                            vector&lt;int&gt; vec;
+                            MyHashSet() : n(1000001),vec(n,0){
+                          
+                            }
+                            
+                            void add(int key) {
+                                vec[key]=1;
+                            }
+                            
+                            void remove(int key) {
+                                vec[key]=0;
+                            }
+                            
+                            /** Returns true if this set contains the specified element */
+                            bool contains(int key) {
+                                if(vec[key]==1)return true;
+                                else return false;
+                            }
+                        };
+                        
+                </pre>
+            </div>
+         
+    </div>
+    </div>
+    
+    <div id="problem-9" class="container problem-9">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 9</h2>
+                <a href="https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/">Vertical Order Traversal of a Binary Tree</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>we have to do vertical order traversal of the tree.The main point here is that we have
+                    to sort vertical order according to their level.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void traverse(TreeNode  *root,map&lt;int,vector&lt;pair&lt;int,int&gt;&gt;&gt; &mp,int index,int level){
+                            if(root==NULL)return ;
+                            
+                            mp[index].push_back({level,root-&gt;val});
+                            traverse(root-&gt;left,mp,index-1,level+1);
+                            traverse(root-&gt;right,mp,index+1,level+1);
+                            return ;
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; verticalTraversal(TreeNode* root) {
+                            if(root==NULL)return {{}};
+                            vector&lt;vector&lt;int&gt;&gt; vec;
+                            vector&lt;int&gt; v;
+                            map&lt;int,vector&lt;pair&lt;int,int&gt;&gt;&gt; mp;
+                            traverse(root,mp,0,0);
+                            for(auto itr=mp.begin();itr!=mp.end();itr++){
+                               sort(itr-&gt;second.begin(),itr-&gt;second.end());
+                               for(auto it=itr-&gt;second.begin();it!=itr-&gt;second.end();it++){
+                                   v.push_back(it-&gt;second);
+                               }
+                                vec.push_back(v);
+                                v.clear();
+                            }
+                            return vec;
+                        }
+                    };
+                 </pre>
+             </div>
+             </div>
+         
     </div>
     <div class="container">
-         <div class="row justify-content-between">
-             <div class="col-3 col-sm-2">
-                <a href="./leetcode.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
-             </div>
-             <div class="col-3 col-sm-2">
-                <a href="./leetcode2.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
-             </div>
-            
-         </div>
-    </div>
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode3.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
 
 
     <footer>
@@ -294,6 +411,7 @@
        <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
        <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
        
 </body>
 
