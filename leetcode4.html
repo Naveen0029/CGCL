@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mr-auto" href="#">CGCL</a>
+
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+ 
+    <div class="fluid-container problems sticky-top sticky-offset">
+        <div class="row">
+            
+            <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-14" class="btn  btn-lg" role="button" aria-disabled="true">Non-overlapping Intervals</a>
+               <a style="color:white;" href="#problem-15" class="btn  btn-lg" role="button" aria-disabled="true">Symmetric Tree</a>
+               <a style="color:white;" href="#problem-16" class="btn  btn-lg" role="button" aria-disabled="true">Binary Tree Zigzag Level Order Traversal</a>
+               <a style="color:white;" href="#problem-17" class="btn  btn-lg" role="button" aria-disabled="true">Find the Duplicate Number</a>
+            
+               
+            </div>
+            
+            <div class="col-12 col-sm-2">
+               <a style="color:white;" href="./leetcode3.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a>     
+               <a style="color:white;" href="./leetcode5.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>     
+            </div>  
+        </div>
+
+    </div>
+    <div id="problem-14" class="container problem-14">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 14</h2>
+                <a href="https://leetcode.com/problems/non-overlapping-intervals/">Non-overlapping Intervals</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>First we have to sort it according to their second number and after that we maintain a variable 
+                    last_index which contain the v[i][1].so we can check that it is overlapping or not.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int eraseOverlapIntervals(vector&lt;vector&lt;int&gt;&gt;& intervals) {
+                            if(intervals.size()==0)return 0;
+                            
+                            int n=intervals.size();
+                            int m=intervals[0].size();
+                            sort(intervals.begin(),intervals.end(),[](vector&lt;int&gt; &a,vector&lt;int&gt; &b){
+                                if(a[1]&lt;b[1])return true;
+                                else if(a[1]==b[1])return a[0]&lt;b[0];
+                                else return false;
+                            });
+                            int last_index=INT_MIN;
+                            int count=0;
+                            for(int i=0;i&lt;n;i++){
+                                if(last_index&gt;intervals[i][0])
+                                {
+                                    count++;
+                                    
+                                }
+                                else
+                                last_index=intervals[i][1];
+                                
+                            }
+                            return count;
+                                
+                        }
+                    };
+                 </pre>
+             </div>
+             </div>
+         
+    </div>
+    <div id="problem-15" class="container problem-15">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 15</h2>
+                <a href="https://leetcode.com/problems/symmetric-tree/">Symmetric Tree</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>using recursion.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        bool symetric(TreeNode* root1,TreeNode* root2){
+                            if(root1==NULL&&root2==NULL)
+                                return true;
+                            if(root1==NULL&&root2!=NULL||root2==NULL&&root1!=NULL)return false;
+                            
+                            if(root1-&gt;val==root2-&gt;val&&symetric(root1-&gt;right,root2-&gt;left)&&symetric(root1-&gt;left,root2-&gt;right))
+                                return true;
+                            else 
+                                return false;
+                        }
+                        bool isSymmetric(TreeNode* root) {
+                            if(root==NULL)
+                                return true;
+                            
+                            return symetric(root-&gt;left,root-&gt;right);
+                            
+                        }
+                    };
+                 </pre>
+             </div>
+             </div>
+         
+    </div>
+    <div id="problem-16" class="container problem-16">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 16</h2>
+                <a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/">Binary Tree Zigzag Level Order Traversal</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Using two stack.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        vector&lt;vector&lt;int&gt;&gt; zigzagLevelOrder(TreeNode* root) {
+                            if(root==NULL)return {};
+                            
+                            vector&lt;vector&lt;int&gt;&gt; vec;
+                            vector&lt;int&gt; v;
+                            stack&lt;TreeNode*&gt; s;
+                            stack&lt;TreeNode*&gt; s1;
+                            s.push(root);
+                            while(!s.empty()||!s1.empty()){
+                                while(!s.empty()){
+                                    TreeNode *n =s.top();
+                                    s.pop();
+                                    if(n-&gt;left)s1.push(n-&gt;left);
+                                    if(n-&gt;right)s1.push(n-&gt;right);
+                                    
+                                    
+                                    v.push_back(n-&gt;val);  
+                                }
+                                if(!v.empty())vec.push_back(v);
+                                
+                                v.clear();
+                                while(!s1.empty()){
+                                    TreeNode *p=s1.top();
+                                    s1.pop();
+                                   
+                                    if(p-&gt;right)s.push(p-&gt;right);
+                                    if(p-&gt;left)s.push(p-&gt;left);
+                                    
+                                    
+                                    v.push_back(p-&gt;val);
+                                }
+                                 if(!v.empty())vec.push_back(v);
+                                
+                                 v.clear();
+                            }
+                            return vec;
+                        }
+                    };
+             </pre>
+             </div>
+             </div>
+         
+    </div>
+    <div id="problem-17" class="container problem-17">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 17</h2>
+                <a href="https://leetcode.com/problems/find-the-duplicate-number/">Find the Duplicate Number</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>As the values of array is lie between 1 to n+1.so we can take the value of array as index of the 
+                    array and making the value of the indexes means that we already traverse the index  and we
+                    are traversing it again it means their is repitive value which lead us to the same index again.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int findDuplicate(vector&lt;int&gt;& nums) {
+                            int i;
+                            int n=nums.size();
+                            for(i=0;i&lt;n;i++){
+                                
+                                  if(abs(nums[abs(nums[i])-1])==-nums[abs(nums[i])-1])
+                                    break;
+                                else
+                                   nums[abs(nums[i])-1]=-nums[abs(nums[i])-1];
+                                
+                            }
+                            return abs(nums[i]);
+                        }
+                    };
+             </pre>
+             </div>
+             </div>
+         
+    </div>
+   
+    
+    <div class="container">
+         <div class="row justify-content-between">
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode3.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+             </div>
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode5.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+             </div>
+            
+         </div>
+    </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-8 col-sm-4 align-self-center">
+                    <div >
+                        <a href="http://google.com/+">Google+</a>
+                        <a href="http://www.facebook.com/profile.php?id=">Facebook</a>
+                        <a href="http://www.linkedin.com/in/">LinkedIn</a>
+                        <a href="http://twitter.com/">Twitter</a>
+                        <a href="http://youtube.com/">YouTube</a>
+                        <a href="mailto:">Mail</a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 make with love</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+</body>
+
+</html> 

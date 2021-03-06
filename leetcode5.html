@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mr-auto" href="#">CGCL</a>
+
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+ 
+    <div class="fluid-container problems sticky-top sticky-offset">
+        <div class="row">
+            
+            <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-18" class="btn  btn-lg" role="button" aria-disabled="true">Remove Linked List Elements</a>
+               <a style="color:white;" href="#problem-19" class="btn  btn-lg" role="button" aria-disabled="true">Count Primes</a>
+               <a style="color:white;" href="#problem-20" class="btn  btn-lg" role="button" aria-disabled="true">Maximum Subarray</a>
+               <a style="color:white;" href="#problem-21" class="btn  btn-lg" role="button" aria-disabled="true">Climbing Stairs</a>
+               <a style="color:white;" href="#problem-22" class="btn  btn-lg" role="button" aria-disabled="true">Unique Paths</a>
+               
+            </div>
+            
+            <div class="col-12 col-sm-2">
+               <a style="color:white;" href="./leetcode4.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a>     
+               <a style="color:white;" href="./leetcode6.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>     
+            </div>  
+        </div>
+
+    </div>
+    <div id="problem-18" class="container problem-18">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 18</h2>
+                <a href="https://leetcode.com/problems/remove-linked-list-elements/">Remove Linked List Elements</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>First Node can also be the node that we want to remove.so we are using 
+                    dummy pointer.Node can also be in queue so we use while loop to remove them.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        ListNode* removeElements(ListNode* head, int val) {
+                            ListNode *dummy=new ListNode(0);
+                            dummy-&gt;next=head;
+                            ListNode *temp=head,*def=dummy;
+                            while(temp!=NULL){
+                                while(temp&&temp-&gt;val==val){
+                                    def-&gt;next=temp-&gt;next;
+                                    temp=temp-&gt;next;
+                                }
+                                
+                                
+                                if(def-&gt;next)def=def-&gt;next;
+                                if(temp)temp=temp-&gt;next;
+                            }
+                            return dummy-&gt;next;
+                        }
+                    };
+                 </pre>
+             </div>
+             </div>
+         
+    </div>
+    <div id="problem-19" class="container problem-19">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 19</h2>
+                <a href="https://leetcode.com/problems/count-primes/">Count Primes</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>class Solution {
+                public:
+                    int countPrimes(int n) {
+                    
+                        vector&lt;int&gt;  arr(n,1);
+                        int count=0;
+                        for(int i=2;i&lt;n;i++){
+                            if(arr[i]==1){
+                                count++;
+                                int j;
+                                for(j=2;j*i&lt;n;j++){
+                                    arr[i*j]=0;
+                                }
+                            }
+                        }
+                        return count;
+                    }
+                };
+                 </pre>
+             </div>
+             </div>
+         
+    </div>
+    <div id="problem-20" class="container problem-20">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 20</h2>
+                <a href="https://leetcode.com/problems/maximum-subarray/">Maximum Subarray</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int maxSubArray(vector&lt;int&gt;& nums) {
+                            int n=nums.size();
+                            int sum=nums[0];
+                            int max_val=nums[0];
+                            for(int i=1;i&lt;n;i++){
+                                sum=max(nums[i],sum+nums[i]);
+                                max_val=max(sum,max_val);
+                                }
+                            
+                            
+                            return max_val;
+                        }
+                    };
+              </pre>
+             </div>
+             </div>
+         
+    </div>
+    <div id="problem-21" class="container problem-21">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 21</h2>
+                <a href="https://leetcode.com/problems/climbing-stairs/">Climbing Stairs</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int calc(int n,vector&lt;int&gt; &dp,int i){
+                            
+                            
+                            if(i&gt;n)
+                                return 0;
+                            
+                            if(i==n)
+                            {
+                               return 1;
+                            }
+                            
+                            if(dp[i]!=-1)
+                                return dp[i];
+                             
+                            
+                            dp[i]=calc(n,dp,i+1)+calc(n,dp,i+2);
+                            return dp[i];
+                            
+                        }
+                        int climbStairs(int n) {
+                            vector&lt;int&gt; dp(n+1,-1);
+                            return calc(n,dp,0);
+                        }
+                    };
+             </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>We can only take two steps n-1 and n-2th.so we started the loop from 
+                    the i=2.because if i=1 then it goes out of bound.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int climbStairs(int n) {
+                            int dp[n+1];
+                            dp[0]=1;
+                            dp[1]=1;
+                            for(int i=2;i&lt;=n;i++){
+                                dp[i]=dp[i-1]+dp[i-2];
+                            }
+                            return dp[n];
+                        }
+                    };
+             </pre>
+             </div>
+             </div>
+         
+    </div>
+
+    <div id="problem-22" class="container problem-22">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 22</h2>
+                <a href="https://leetcode.com/problems/unique-paths/">Unique Paths</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                    if i and j=0 means in the first row then their is only one path so for all 
+                    i==0 and j==0 we set dp[i][j]=1.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int uniquePaths(int m, int n) {
+                            int dp[m][n];
+                            for(int i=0;i&lt;m;i++){
+                                for(int j=0;j&lt;n;j++){
+                                    if(i==0||j==0)
+                                        dp[i][j]=1;
+                                    else
+                                    dp[i][j]=dp[i-1][j]+dp[i][j-1];
+                                }
+                            }
+                            return dp[m-1][n-1];
+                        }
+                    };
+             </pre>
+             </div>
+             </div>
+         
+    </div>
+   
+   
+    
+    <div class="container">
+         <div class="row justify-content-between">
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode3.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+             </div>
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode5.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+             </div>
+            
+         </div>
+    </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-8 col-sm-4 align-self-center">
+                    <div >
+                        <a href="http://google.com/+">Google+</a>
+                        <a href="http://www.facebook.com/profile.php?id=">Facebook</a>
+                        <a href="http://www.linkedin.com/in/">LinkedIn</a>
+                        <a href="http://twitter.com/">Twitter</a>
+                        <a href="http://youtube.com/">YouTube</a>
+                        <a href="mailto:">Mail</a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 make with love</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+</body>
+
+</html> 
