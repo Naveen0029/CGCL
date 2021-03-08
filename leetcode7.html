@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mr-auto" href="#">CGCL</a>
+
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+ 
+    <div class="fluid-container problems sticky-top sticky-offset">
+        <div class="row">
+            
+            <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-28" class="btn  btn-lg" role="button" aria-disabled="true">Linked List Cycle II</a>
+               <a style="color:white;" href="#problem-29" class="btn  btn-lg" role="button" aria-disabled="true">Copy List with Random Pointer</a>
+               <a style="color:white;" href="#problem-30" class="btn  btn-lg" role="button" aria-disabled="true">Longest Substring Without Repeating Characters</a>
+               <a style="color:white;" href="#problem-31" class="btn  btn-lg" role="button" aria-disabled="true"></a>
+               <a style="color:white;" href="#problem-32" class="btn  btn-lg" role="button" aria-disabled="true"></a>
+               
+            </div>
+            
+            <div class="col-12 col-sm-2">
+               <a style="color:white;" href="./leetcode6.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a>     
+               <a style="color:white;" href="./leetcode8.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>     
+            </div>  
+        </div>
+
+    </div>
+    <div id="problem-28" class="container problem-28">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 28</h2>
+                <a href="https://leetcode.com/problems/linked-list-cycle-ii/">Linked List Cycle II</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>This code successfully run if u set tortoise and hare equal to head.Their is no need to take 
+                    dummy pointer.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        ListNode *detectCycle(ListNode *head) {
+                            if(head==NULL)return {};
+                        
+                             ListNode *dummy=new ListNode(-1);
+                             dummy-&gt;next=head;
+                             ListNode *tortoise=dummy,*hare=dummy;
+                             do{
+                                tortoise=tortoise-&gt;next;
+                                if(hare&&hare-&gt;next)hare=hare-&gt;next-&gt;next;
+                                else return NULL;
+                                
+                             }while(hare&&tortoise!=hare);
+                            
+                             if(hare==NULL)return NULL;
+                             tortoise=dummy;
+                             while(tortoise!=hare){
+                                tortoise=tortoise-&gt;next;
+                                 hare=hare-&gt;next;    
+                            }
+                            return tortoise;
+                        }
+                    };
+                 </pre>
+             </div>
+           </div>
+         
+    </div>
+    <div id="problem-29" class="container problem-29">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 29</h2>
+                <a href="https://leetcode.com/problems/copy-list-with-random-pointer/">Copy List with Random Pointer</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Recursive
+                </i>
+                </p>
+             <pre>
+                unordered_map&lt;Node*,Node*&gt; mp;
+                class Solution {
+                public:
+                    Node* copyRandomList(Node* head) {
+                        if(head==NULL)
+                            return {};
+                        
+                        Node *root=new Node(head-&gt;val);
+                        mp[head]=root;
+                        
+                        root-&gt;next=copyRandomList(head-&gt;next);
+                        
+                        if(head-&gt;random!=NULL)
+                        root-&gt;random=mp[head-&gt;random];
+                        else
+                            root-&gt;random=NULL;
+                        
+                        return root;
+                    }
+                };
+            </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Iterative
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        Node* copyRandomList(Node* head) {
+                            if(head==NULL)return head;
+                            
+                            unordered_map&lt;Node*,Node*&gt; mp;
+                            Node *temp=head;
+                            while(temp!=NULL){
+                                mp[temp]=new Node(temp-&gt;val);
+                                temp=temp-&gt;next;
+                            }
+                            temp=head;
+                            while(temp!=NULL){
+                                mp[temp]-&gt;next=mp[temp-&gt;next];
+                                mp[temp]-&gt;random=mp[temp-&gt;random];
+                                temp=temp-&gt;next;
+                            }
+                            return mp[head];
+                        }
+                    };
+              </pre>
+             </div>
+            
+             </div>
+         
+    </div>
+    <div id="problem-30" class="container problem-30">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 30</h2>
+                <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/"> Longest Substring Without Repeating Characters</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                    we use the sliding approch in which when we find the same element in newly formed string which lies 
+                    between the 0 to index-1,so we remove the string upto that particular index which lies between 0 to index-1. 
+                </br>Using inbuilt function for finding string.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int lengthOfLongestSubstring(string s) {
+                           if(s.size()==0||s.size()==1)return s.size();
+                            int cnt=0;
+                            int f_cnt=0;
+                            string str="";
+                            
+                            
+                            for(int i=0;i&lt;s.size();i++){
+                               char c=s[i];
+                               size_t found=str.find(c);
+                        
+                                if(found!=string::npos){
+                                    cnt=cnt-(found+1);
+                                    str.erase(0,found+1);
+                                }
+                                cnt++;
+                                str+=s[i];
+                                f_cnt=max(cnt,f_cnt);
+                            }
+                            return f_cnt;
+                        }
+                    };
+              </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int findCharacter(string &str,char x){
+                            int index=-1;
+                            for(int i=0;i&lt;str.length();i++){
+                                if(str[i]==x)
+                                    return i;
+                            }
+                            return index;
+                        }
+                        int lengthOfLongestSubstring(string s) {
+                            int n=s.length();
+                            if(n==0)
+                                return 0;
+                            
+                            string str="";
+                            int length=0;
+                            for(int i=0;i&lt;n;i++){
+                                int index=findCharacter(str,s[i]);
+                                if(index==-1){
+                                    str=str+s[i];
+                                    if(length&lt;str.length())
+                                        length=str.length();
+                                }
+                                else{
+                                    if(length&lt;str.length())
+                                        length=str.length();
+                                        str=str.erase(0,index+1)+s[i];
+                                }
+                            }
+                            if(length==0)
+                                return str.length();
+                            else return length;
+                        }
+                    };
+              </pre>
+             </div>
+             </div>
+         
+    </div>
+
+    
+    
+         
+   
+   
+   
+    
+    <div class="container">
+         <div class="row justify-content-between">
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode3.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+             </div>
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode5.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+             </div>
+            
+         </div>
+    </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-8 col-sm-4 align-self-center">
+                    <div >
+                        <a href="http://google.com/+">Google+</a>
+                        <a href="http://www.facebook.com/profile.php?id=">Facebook</a>
+                        <a href="http://www.linkedin.com/in/">LinkedIn</a>
+                        <a href="http://twitter.com/">Twitter</a>
+                        <a href="http://youtube.com/">YouTube</a>
+                        <a href="mailto:">Mail</a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 make with love</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+</body>
+
+</html> 
