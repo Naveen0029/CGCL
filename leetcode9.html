@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mr-auto" href="#">CGCL</a>
+
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+ 
+    <div class="fluid-container problems sticky-top sticky-offset">
+        <div class="row">
+            
+            <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-36" class="btn  btn-lg" role="button" aria-disabled="true">Majority Element</a>
+               <a style="color:white;" href="#problem-37" class="btn  btn-lg" role="button" aria-disabled="true">3Sum Closest</a>
+               <a style="color:white;" href="#problem-38" class="btn  btn-lg" role="button" aria-disabled="true">Power of Two</a>
+               <a style="color:white;" href="#problem-39" class="btn  btn-lg" role="button" aria-disabled="true">4Sum</a>
+               <a style="color:white;" href="#problem-40" class="btn  btn-lg" role="button" aria-disabled="true">Flatten Binary Tree to Linked List</a>
+              
+               
+            </div>
+            
+            <div class="col-12 col-sm-2">
+               <a style="color:white;" href="./leetcode8.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a>     
+               <a style="color:white;" href="./leetcode10.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>     
+            </div>  
+        </div>
+
+    </div>
+    <div id="problem-36" class="container problem-36">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 36</h2>
+                <a href="https://leetcode.com/problems/majority-element/">Majority Element</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>we are assuming that on our first index the majority element is present.so whenever the same
+                    element apperas again we increase the count.And if other element elements appears then we decrease the 
+                    count.But as we know their are n/2+1 majority elements.we will definitely find the majority element.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int majorityElement(vector&lt;int&gt;& nums) {
+                            int n=nums.size();
+                            if(n&lt;1)
+                                return {};
+                            
+                            int maj_num=nums[0];
+                            int count=1;
+                            for(int i=1;i&lt;n;i++){
+                                if(maj_num==nums[i])
+                                    count++;
+                                else if(count==0){
+                                    maj_num=nums[i];
+                                    count=1;
+                                }
+                                else{
+                                    count--;
+                                }
+                                    
+                          }
+                           return maj_num; 
+                        }
+                    };
+                 </pre>
+             </div>
+             
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Time complexity O(nlogn)
+                    if we sort the array then at n/2th index our majority element is present.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int majorityElement(vector&lt;int&gt;& nums) {
+                            sort(nums.begin(),nums.end());
+                            int n=nums.size();
+                            return nums[n/2];
+                        }
+                    };
+                 </pre>
+             </div>
+           </div>
+         
+    </div>
+    <div id="problem-37" class="container problem-37">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 37</h2>
+                <a href="https://leetcode.com/problems/3sum-closest/">3Sum Closest</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>First sort the array and consider the three pointer.First pointer is fixed and second and third 
+                    pointer always towards each other.and we have to check the minimum absolute difference of the sum 
+                    of these three pointer with target. abs(target-(nums[first]+nums[second]+nums[third])).
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int threeSumClosest(vector&lt;int&gt;& nums, int target) {
+                            sort(nums.begin(),nums.end());
+                            int n=nums.size();
+                            int diff=INT_MAX;
+                            int ans;
+                            for(int i=0;i&lt;n;i++){
+                            int j=i+1;
+                            int k=n-1;
+                            while(j&lt;k){
+                               int  sum=nums[i]+nums[j]+nums[k];
+                                if(abs(sum-target)&lt;abs(diff)){
+                                    diff=sum-target;
+                                    ans=sum;
+                                    
+                                }
+                                if(sum&lt;target)
+                                    j++;
+                                else{
+                                    k--;
+                                }
+                            }
+                            }     
+                            return ans;
+                        }
+                    };
+            </pre>
+             </div>
+             </div>
+         
+    </div>
+    <div id="problem-38" class="container problem-38">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 38</h2>
+                <a href="https://leetcode.com/problems/power-of-two/"> Power of Two</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>0001-1
+                    0010-2&nbsp;
+                    0100-4&nbsp;
+                    1000-8&nbsp;
+                    so we are seeing that if a number is power of two then the only one bit is set remaining are not set.
+                    so when we reduce 1 from n then it all other bit become set  except the bit which is set earlier.
+                    0111-7&nbsp;
+                    when n&n-1 is equal to zero it means the number is power of 2.</br>
+                    0111-7&nbsp;
+                    0110-6&nbsp;</br>
+                    7&6 is not equal to zero
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        bool isPowerOfTwo(int n) {
+                            if(n&lt;=0)
+                                return false;
+                            if((n&n-1)==0)
+                                return true;
+                            else 
+                                return false;
+                        }
+                    };
+              </pre>
+             </div>
+             </div>
+         
+    </div>
+
+    <div id="problem-39" class="container problem-39">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 39</h2>
+                <a href="https://leetcode.com/problems/4sum/">4Sum</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Fix the one index and caluclate the three sum.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;& nums,int target,
+                        int j,vector&lt;vector&lt;int&gt;&gt; &vec,map&lt;vector&lt;int&gt;,int&gt; &m){
+                            vector&lt;int&gt; v;
+                            int s=nums.size();
+                            for(int i=j+1;i&lt;s;i++){
+                                int n=i+1;
+                                int k=s-1;
+                                
+                                while(n&lt;k){
+                                   int sum=nums[i]+nums[n]+nums[k];
+                                    if(sum&lt;target){
+                                        n++;
+                                    }
+                                    else if(sum&gt;target)
+                                        k--;
+                                    else{
+                                        v.push_back(nums[j]);
+                                        v.push_back(nums[i]);
+                                        v.push_back(nums[n]);
+                                        v.push_back(nums[k]);
+                                        if(m.find(v)==m.end()){
+                                        vec.push_back(v);
+                                         m[v]++;}
+                                    
+                                        v.clear();
+                                        n++;k--;
+                                    }
+                               }
+                            }
+                            return vec;
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; fourSum(vector&lt;int&gt;& nums, int target) {
+                            if(nums.size()&lt;4)
+                                return {};
+                            
+                            vector&lt;vector&lt;int&gt;&gt; vec;
+                            map&lt;vector&lt;int&gt;,int&gt; mp;
+                            sort(nums.begin(),nums.end());
+                            for(int i=0;i&lt;nums.size()-3;i++){
+                                threeSum(nums,target-nums[i],i,vec,mp);
+                            }
+                            return vec;
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>No of index fixed is always equal to k-2.so it means we have to find two sum after fixing two index while finding
+                    4Sum.
+                </i>
+                </p>
+             <pre> class Solution {
+                public:
+                    vector&lt;vector&lt;int&gt;&gt; twoSum(vector&lt;int&gt; &nums,int target,int start){
+                        vector&lt;vector&lt;int&gt;&gt; vec;
+                        vector&lt;int&gt; v;
+                        int end=nums.size()-1;
+                        int low=start;
+                        while(low&lt;end){
+                            int sum=nums[low]+nums[end];
+                            if(sum&lt;target||(low&gt;start&&nums[low]==nums[low-1]))low++;
+                            else if(sum&gt;target||((end&lt;nums.size()-1)&&nums[end]==nums[end+1]))end--;
+                            else{
+                                
+                                v.push_back(nums[low++]);
+                                v.push_back(nums[end--]);
+                                vec.push_back(v);
+                                v.clear();
+                            }
+                        }
+                        return vec;
+                    }
+                    vector&lt;vector&lt;int&gt;&gt; kSum(vector&lt;int&gt;&nums,int target,int start,int k){
+                        vector&lt;vector&lt;int&gt;&gt; res;
+                         vector&lt;int&gt; v;
+                        if(start==nums.size()||nums[start]*k&gt;target||target&gt;nums[nums.size()-1]*k)
+                        return res;
+                        if(k==2)return twoSum(nums,target,start);
+                        for(int i=start;i&lt;nums.size();i++){
+                            if(i==start||(i&gt;0&&nums[i-1]!=nums[i])){
+                                for(vector&lt;int&gt; itr:kSum(nums,target-nums[i],i+1,k-1)){
+                                   
+                                    v.push_back(nums[i]);
+                                    int k=itr.size()-1;
+                                    reverse(itr.begin(),itr.end());
+                                    while(!itr.empty()){
+                                        v.push_back(itr[k--]);
+                                        itr.pop_back();
+                                    }
+                                    res.push_back(v);
+                                    
+                                    v.clear();
+                                }
+                            }
+                        }
+                        return res;
+                    }
+                    vector&lt;vector&lt;int&gt;&gt; fourSum(vector&lt;int&gt;& nums, int target) {
+                        sort(nums.begin(),nums.end());
+                        return kSum(nums,target,0,4);
+                    }
+                    
+                };
+                 </pre>
+             </div>
+           </div>
+    </div>
+    
+    <div id="problem-40" class="container problem-40">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 40</h2>
+                <a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/">Flatten Binary Tree to Linked List</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Using stack
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void fill_flatten(TreeNode *root,queue&lt;TreeNode *&gt; &s){
+                            if(root==NULL)
+                                return ;
+                            
+                            s.push(root);
+                            fill_flatten(root-&gt;left,s);
+                            fill_flatten(root-&gt;right,s);
+                            return;
+                        }
+                        void flatten(TreeNode* root) {
+                            
+                            queue&lt;TreeNode *&gt; s;
+                            fill_flatten(root,s);
+                            TreeNode *dummy=new TreeNode(0);
+                            while(!s.empty()){
+                                TreeNode *n=s.front();
+                                s.pop();
+                                dummy-&gt;right=n;
+                                dummy-&gt;left=NULL;
+                                dummy=dummy-&gt;right;
+                            }
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Using Recursion
+                </i>
+                </p>
+             <pre> 
+                class Solution {
+                    public:
+                        TreeNode *flatt(TreeNode *root){
+                             if(root==NULL)return root;
+                            
+                            TreeNode *a=flatt(root-&gt;right);
+                            TreeNode *b=flatt(root-&gt;left);
+                            TreeNode *temp=b;
+                            if(b){
+                                while(b-&gt;right!=NULL)b=b-&gt;right;
+                                b-&gt;right=a;
+                            }
+                            if(temp)root-&gt;right=temp;
+                            root-&gt;left=NULL;
+                            return root;
+                        }
+                        void flatten(TreeNode* root) {
+                            if(root==NULL)return ;
+                            flatt(root);
+                            return;
+                        }
+                    };
+                 </pre>
+             </div>
+           </div>
+    </div>
+    
+    
+         
+   
+   
+   
+    
+    <div class="container">
+         <div class="row justify-content-between">
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode8.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+             </div>
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode10.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+             </div>
+            
+         </div>
+    </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-8 col-sm-4 align-self-center">
+                    <div >
+                        <a href="http://google.com/+">Google+</a>
+                        <a href="http://www.facebook.com/profile.php?id=">Facebook</a>
+                        <a href="http://www.linkedin.com/in/">LinkedIn</a>
+                        <a href="http://twitter.com/">Twitter</a>
+                        <a href="http://youtube.com/">YouTube</a>
+                        <a href="mailto:">Mail</a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 make with love</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+</body>
+
+</html> 

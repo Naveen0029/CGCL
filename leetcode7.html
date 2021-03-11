@@ -55,8 +55,8 @@
                 <a style="color:white;" href="#problem-28" class="btn  btn-lg" role="button" aria-disabled="true">Linked List Cycle II</a>
                <a style="color:white;" href="#problem-29" class="btn  btn-lg" role="button" aria-disabled="true">Copy List with Random Pointer</a>
                <a style="color:white;" href="#problem-30" class="btn  btn-lg" role="button" aria-disabled="true">Longest Substring Without Repeating Characters</a>
-               <a style="color:white;" href="#problem-31" class="btn  btn-lg" role="button" aria-disabled="true"></a>
-               <a style="color:white;" href="#problem-32" class="btn  btn-lg" role="button" aria-disabled="true"></a>
+               <a style="color:white;" href="#problem-31" class="btn  btn-lg" role="button" aria-disabled="true">Number of Good Pairs</a>
+              
                
             </div>
             
@@ -276,6 +276,44 @@
          
     </div>
 
+    <div id="problem-31" class="container problem-31">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 31</h2>
+                <a href="https://leetcode.com/problems/number-of-good-pairs/">Number of Good Pairs</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>It is like u have two seats and n number of people.In how many ways they can sit on the chair.
+                    There are total nc2 ways.But one important thing one person can sit one time with the same person.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int numIdenticalPairs(vector&lt;int&gt;& nums) {
+                            int n=nums.size();
+                            map&lt;int,int&gt; mp;
+                            for(int i=0;i&lt;n;i++){
+                                mp[nums[i]]++;
+                            }
+                            int sum=0;
+                            for(auto itr=mp.begin();itr!=mp.end();itr++){
+                                if(itr-&gt;second&gt;1){
+                                    sum+=(itr-&gt;second*(itr-&gt;second-1))/2;
+                                }
+                            }
+                            return sum;
+                        }
+                    };
+                 </pre>
+             </div>
+           </div>
+    </div>
     
     
          
@@ -286,10 +324,10 @@
     <div class="container">
          <div class="row justify-content-between">
              <div class="col-3 col-sm-2">
-                <a href="./leetcode3.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+                <a href="./leetcode6.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
              </div>
              <div class="col-3 col-sm-2">
-                <a href="./leetcode5.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+                <a href="./leetcode8.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
              </div>
             
          </div>

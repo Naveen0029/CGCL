@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mr-auto" href="#">CGCL</a>
+
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+ 
+    <div class="fluid-container problems sticky-top sticky-offset">
+        <div class="row">
+            
+            <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-32" class="btn  btn-lg" role="button" aria-disabled="true">Minimum Operations to Make Array Equal</a>
+               <a style="color:white;" href="#problem-33" class="btn  btn-lg" role="button" aria-disabled="true">Matrix Block Sum</a>
+               <a style="color:white;" href="#problem-34" class="btn  btn-lg" role="button" aria-disabled="true">Single Number</a>
+               <a style="color:white;" href="#problem-35" class="btn  btn-lg" role="button" aria-disabled="true">Container With Most Water</a>
+              
+               
+            </div>
+            
+            <div class="col-12 col-sm-2">
+               <a style="color:white;" href="./leetcode7.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a>     
+               <a style="color:white;" href="./leetcode9.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>     
+            </div>  
+        </div>
+
+    </div>
+    <div id="problem-32" class="container problem-32">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 32</h2>
+                <a href="https://leetcode.com/problems/minimum-operations-to-make-array-equal/">Minimum Operations to Make Array Equal</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Their is simple logic if one value is increase then another one is decreased.
+                    First we have to calculate average.
+                    Here average of these number is showing that all the number become equal to their average.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int minOperations(int n) {
+                            int x=0;
+                            for(int i=0;i&lt;n;i++)x+=(2*i+1);
+                            x/=n;
+                            int ans=0;
+                            for(int i=0;i&lt;n/2;i++){
+                                ans=ans+(x-(2*i+1));
+                            }
+                            return ans;
+                        }
+                    };
+                 </pre>
+             </div>
+           </div>
+         
+    </div>
+    <div id="problem-33" class="container problem-33">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 33</h2>
+                <a href="https://leetcode.com/problems/matrix-block-sum/">Matrix Block Sum</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Brute Force approch
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int setMatrix(int i,int j,int n,int m,int k,vector&lt;vector&lt;int&gt;&gt;& mat){
+                            int sum=0;
+                            for(int s=max(0,i-k);s&lt;=min(n,i+k);s++){
+                                for(int r=max(0,j-k);r&lt;=min(m,j+k);r++){
+                                    sum=sum+mat[s][r];
+                                }
+                            }
+                            return sum;
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; matrixBlockSum(vector&lt;vector&lt;int&gt;&gt;& mat, int K) {
+                            int n=mat.size();
+                            int m=mat[0].size();
+                            
+                            vector&lt;vector&lt;int&gt;&gt; answer(n,(vector&lt;int&gt; (m,0)));
+                            for(int i=0;i&lt;n;i++){
+                                for(int j=0;j&lt;m;j++){
+                                    answer[i][j]=setMatrix(i,j,n-1,m-1,K,mat);
+                                }
+                            }
+                            return answer;
+                        }
+                    };
+            </pre>
+             </div>
+             </div>
+         
+    </div>
+    <div id="problem-34" class="container problem-34">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 34</h2>
+                <a href="https://leetcode.com/problems/single-number/"> Single Number</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>a^a=0 and 0^a=a
+                </i>
+                </p>
+             <pre>class Solution {
+                public:
+                    int singleNumber(vector&lt;int&gt;& nums) {
+                        int ans=nums[0];
+                        for(int i=1;i&lt;nums.size();i++){
+                            ans=ans^nums[i];
+                        }
+                        return ans;
+                    }
+                };
+              </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>(a+b+c)-(a+b)
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int singleNumber(vector&lt;int&gt;& nums) {
+                            map&lt;int,int&gt; mp;
+                            int a=0;
+                            int b=0;
+                            
+                            for(int i=0;i&lt;nums.size();i++){
+                                if(mp.find(nums[i])==mp.end()){
+                                    a+=nums[i];
+                                    mp[nums[i]]++;
+                                }
+                                else b+=nums[i];
+                            }
+                            return a-b;
+                        }
+                    };
+              </pre>
+             </div>
+             </div>
+         
+    </div>
+
+    <div id="problem-35" class="container problem-35">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 35</h2>
+                <a href="https://leetcode.com/problems/container-with-most-water/">Container With Most Water</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>We take two pointers one on the starting position and the other one on the ending positiion.
+                    The logic behind the taking of two pointer is that the height which is smaller always matters
+                    because if one side height is bigger and other side  height is smaller then the maximum water store
+                    depends on the minimum height.
+                    Now how two pointers work.when we get the smaller height on one side then we have to move the pointer 
+                    to the next position (end-1)or(start+1).because we always take one side maximum so we must have to move 
+                    the sorter side.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int maxArea(vector&lt;int&gt;& height) {
+                            int start=0;
+                            int end=height.size()-1;
+                            int area=0;
+                            while(start&lt;end){
+                                int value_min=min(height[start],height[end]);
+                                area=max(area,value_min*(end-start));
+                                if(height[start]&lt;height[end])
+                                    start++;
+                                else end--;
+                                
+                                if(start&gt;=end)
+                                    break;
+                                
+                            }
+                            return area;
+                        }
+                    };
+                 </pre>
+             </div>
+           </div>
+    </div>
+    
+    
+         
+   
+   
+   
+    
+    <div class="container">
+         <div class="row justify-content-between">
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode7.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+             </div>
+             <div class="col-3 col-sm-2">
+                <a href="./leetcode9.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+             </div>
+            
+         </div>
+    </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-8 col-sm-4 align-self-center">
+                    <div >
+                        <a href="http://google.com/+">Google+</a>
+                        <a href="http://www.facebook.com/profile.php?id=">Facebook</a>
+                        <a href="http://www.linkedin.com/in/">LinkedIn</a>
+                        <a href="http://twitter.com/">Twitter</a>
+                        <a href="http://youtube.com/">YouTube</a>
+                        <a href="mailto:">Mail</a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 make with love</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+</body>
+
+</html> 
