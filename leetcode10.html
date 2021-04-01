@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-41" class="btn  btn-lg" role="button" aria-disabled="true">Search in Rotated Sorted Array</a>
+                <a style="color:white;" href="#problem-42" class="btn  btn-lg" role="button" aria-disabled="true">Counting Bits</a>
+                <a style="color:white;" href="#problem-43" class="btn  btn-lg" role="button" aria-disabled="true">Next Permutation</a>
+                <a style="color:white;" href="#problem-44" class="btn  btn-lg" role="button" aria-disabled="true">Populating Next Right Pointers in Each Node</a>
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode9.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode11.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-41" class="container problem-41">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 41</h2>
+                <a href="https://leetcode.com/problems/search-in-rotated-sorted-array/">Search in Rotated Sorted Array</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>In this approch first we find the pivot point and after that we find 
+                   in which strictly increasing number it lies.
+
+               </i>
+               </p>
+            <pre>class Solution {
+                public:
+                    int pivot(vector&lt;int&gt; &nums){
+                        
+                        int start=0;
+                        int end=nums.size()-1;
+                       
+                        if(nums[start]&lt;nums[end])return -1;
+                        while(start&lt;=end){
+                              int mid=(start+end)/2;
+                            if(nums[mid]&gt;nums[mid+1])
+                                return mid;
+                            if(nums[start]&gt;nums[mid]){
+                                end=mid-1;
+                            }
+                            else start=mid+1;
+                           
+                           
+                        }
+                        return -1;
+                    }
+                    int binarySearch(vector&lt;int&gt; &nums,int target,int start,int end){
+                        while(start&lt;=end){
+                            int mid=(start+end)/2;
+                            if(nums[mid]&gt;target){
+                                end=mid-1;
+                            }
+                            else if(nums[mid]&lt;target) start=mid+1;
+                            else return mid;
+                        } 
+                        return -1;
+                    }
+                    int search(vector&lt;int&gt;& nums, int target) {
+                        if(nums.size()==1){
+                            if(nums[0]==target)return 0;
+                            else return -1;
+                        }
+                
+                        
+                        int piv=pivot(nums);
+                        
+                        if(piv==-1)return binarySearch(nums,target,0,nums.size()-1);
+                        if(nums[piv]==target)return piv;
+                      
+                       if(nums[0]&lt;target)return binarySearch(nums,target,0,piv-1);
+                        else if(nums[0]&gt;target)return binarySearch(nums,target,piv+1,nums.size()-1);
+                        else return 0;
+                           
+                        return -1;
+                    }
+                };
+                
+                </pre>
+            </div>
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>In this we just compare the middle element with the starting element
+                    we are finding the normal increasing flow here.if starting element is greater then
+                    the middle element then it means the graph between the starting and the middle element 
+                    is not strictly increasing.
+                </i>
+                </p>
+                <pre>
+                    class Solution {
+                        public:
+                            int search(vector&lt;int&gt;& nums, int target) {
+                                int start=0;
+                                int end=nums.size()-1;
+                                while(start&lt;=end){
+                                    int mid=(start+end)/2;
+                                    if(nums[mid]==target)return mid;
+                                    else if(nums[mid]&lt;nums[start]){
+                                        if(nums[mid]&lt;=target&&nums[end]&gt;=target)start=mid+1;
+                                        else end=mid-1;
+                                    }
+                                    else{
+                                        if(target&lt;=nums[mid]&&nums[start]&lt;=target){
+                                            end=mid-1;
+                                        }
+                                        else start=mid+1;
+                                    }
+                                }
+                                return -1;
+                            }
+                        };
+                </pre>
+            </div>
+        </div> 
+    </div>
+    <div id="problem-42" class="container problem-42">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 42</h2>
+                <a href="https://leetcode.com/problems/counting-bits/">Counting Bits</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>First set all the number which is power of two.After that all the number
+                    can be formed by using most siginficant bit + (numbr-msb);
+                </i>
+                </p>
+             <pre>class Solution {
+                public:
+                    vector&lt;int&gt; countBits(int num) {
+                        if(num==0)return {0};
+                        int s=num;
+                        vector&lt;int&gt; v(s+1,0);
+                        v[1]=1;
+                        for(int i=2;i&lt;=s;i*=2){
+                            v[i]=1;
+                        }
+                        int msb=0;
+                        for(int i=0;i&lt;=num;i++){
+                            if(v[i]==1)msb=i;
+                            else v[i]=v[msb]+v[i-msb];
+                        }
+                        return v;
+                    }
+                };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>This solution take less time as compared to first.The concept of both is 
+                    same.First we adding starting element then we adding the element at the nth position.</i>
+                </p>
+                <pre>
+                    class Solution {
+                        public:
+                            vector&lt;int&gt; shuffle(vector&lt;int&gt;& nums, int n) {
+                                vector&lt;int&gt; ans;
+                                for(int i=0;i&lt;n;i++){
+                                    ans.push_back(nums[i]);
+                                    ans.push_back(nums[i+n]);
+                                }
+                                return ans;
+                            }
+                        };
+                </pre>
+            </div>
+         
+    </div>
+    </div>
+    <div id="problem-43" class="container problem-43">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 43</h2>
+                <a href="https://leetcode.com/problems/next-permutation/">Next Permutation</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>We just have to find the next greater element of the element which 
+                    is smaller then the i+1th element.After finding we have to replace the 
+                    numbers.
+                    Now reverse all the number after the ith element.
+                </i>
+                </p>
+             <pre>
+                 class Solution {
+                public:
+                    void swap(vector&lt;int&gt; &nums,int i,int j){
+                         int val=nums[i];
+                                nums[i]=nums[j];
+                                nums[j]=val;
+                               
+                    }
+                    void nextPermutation(vector&lt;int&gt;& nums) {
+                        if(nums.size()==1)return;
+                        int n=nums.size();
+                       
+                        int start=0;
+                        for(int i=n-2;i&gt;=0;i--){
+                            if(nums[i]&gt;=nums[i+1])
+                                continue;
+                            else {
+                                swap(nums,i,n-1);
+                                start=i+1;
+                                break;
+                            }
+                        }
+                       
+                          
+                         int end=n-1;
+                        while(start&lt;end){
+                           
+                            swap(nums,start,end);
+                            start++;
+                            end--;
+                        } 
+                        
+                      
+                        return ;
+                    }
+                };
+                 </pre>
+             </div>
+         
+    </div>
+    </div>
+    <div id="problem-44" class="container problem-44">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 44</h2>
+                <a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node/">Populating Next Right Pointers in Each Node</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                    preorder traversal
+                </i>
+                </p>
+             <pre>class Solution {
+                public:
+                    Node* connect(Node* root) {
+                        if(root==NULL)return root;
+                        if(root-&gt;left)root-&gt;left-&gt;next=root-&gt;right;
+                        if(root-&gt;next&&root-&gt;next-&gt;left){
+                            if(root-&gt;right)root-&gt;right-&gt;next=root-&gt;next-&gt;left;
+                        }
+                        connect(root-&gt;right);
+                        connect(root-&gt;left);
+                        return root;
+                    }
+                };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                   
+                </i>
+                </p>
+             <pre>
+class Solution {
+    public:
+        Node* connect(Node* root) {
+            if(root==NULL)
+                return root;
+            
+            if(root-&gt;right!=NULL&&root-&gt;next!=NULL){
+                root-&gt;right-&gt;next=root-&gt;next-&gt;left;
+                
+            }
+            else if(root-&gt;left==NULL&&root-&gt;right==NULL){
+                if(root-&gt;next!=NULL)
+                    return root;
+                else{
+                    root-&gt;next=NULL;
+                    return root;
+                }
+            }
+            root-&gt;left-&gt;next=connect(root-&gt;right);
+            connect(root-&gt;left);
+            return root;
+        }
+    };
+                 </pre>
+             </div>
+            
+         
+     </div>
+    </div>
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode9.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode11.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 

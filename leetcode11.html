@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-45" class="btn  btn-lg" role="button" aria-disabled="true"> Populating Next Right Pointers in Each Node II</a>
+                <a style="color:white;" href="#problem-46" class="btn  btn-lg" role="button" aria-disabled="true">Sum Root to Leaf Numbers</a>
+                <a style="color:white;" href="#problem-47" class="btn  btn-lg" role="button" aria-disabled="true">House Robber</a>
+                <a style="color:white;" href="#problem-48" class="btn  btn-lg" role="button" aria-disabled="true">Reverse Linked List II</a>
+                <a style="color:white;" href="#problem-49" class="btn  btn-lg" role="button" aria-disabled="true">Rotate List</a>
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode10.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode12.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-45" class="container problem-45">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 45</h2>
+                <a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/"> Populating Next Right Pointers in Each Node II</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>
+
+               </i>
+               </p>
+            <pre>
+                
+class Solution {
+    public:
+        Node* connect(Node* root) {
+            if(root==NULL)
+                return root;
+            
+            Node *root1=root-&gt;next;
+            while(root1!=NULL&&root1-&gt;next!=NULL&&root1-&gt;left==NULL&&root1-&gt;right==NULL){
+                root1=root1-&gt;next;
+            }
+            if(root-&gt;right!=NULL&&root-&gt;next!=NULL){
+                if(root1-&gt;left!=NULL)
+                    root-&gt;right-&gt;next=root1-&gt;left;
+                else if(root1-&gt;right!=NULL)
+                    root-&gt;right-&gt;next=root1-&gt;right;
+                else
+                    root-&gt;right-&gt;next=NULL;
+            }
+            else if(root-&gt;left!=NULL&&root-&gt;next!=NULL){
+                if(root1-&gt;left!=NULL)
+                    root-&gt;left-&gt;next=root1-&gt;left;
+                else if(root1-&gt;right!=NULL)
+                    root-&gt;left-&gt;next=root1-&gt;right;
+                else
+                    root-&gt;left-&gt;next=NULL;
+            }
+            else if(root-&gt;left==NULL&&root-&gt;right==NULL){
+                return root;
+            }
+            
+            
+            if(root-&gt;left!=NULL&&root-&gt;right!=NULL)
+                root-&gt;left-&gt;next=connect(root-&gt;right);
+            else
+                connect(root-&gt;right);
+            
+            connect(root-&gt;left);
+            return root;
+        }
+    };
+                </pre>
+            </div>
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>
+                    preorder traversal
+                </i>
+                </p>
+                <pre>
+
+                  class Solution {
+                        public:
+                            Node* connect(Node* root) {
+                                if(root==NULL)return root;
+                                
+                                Node *temp=root;
+                                Node *def=temp;
+                                while(temp!=NULL){
+                                    temp=temp-&gt;next;
+                                    if(def-&gt;left&&def-&gt;right){
+                                        def-&gt;left-&gt;next=def-&gt;right;
+                                    }
+                                    if(def-&gt;right){
+                                        if(temp&&temp-&gt;left){
+                                            def-&gt;right-&gt;next=temp-&gt;left;
+                                             def=temp;
+                                        }
+                                        else if(temp&&temp-&gt;right){
+                                            def-&gt;right-&gt;next=temp-&gt;right;
+                                             def=temp;
+                                        }
+                                       
+                                    }
+                                    else if(def-&gt;left){
+                                        if(temp&&temp-&gt;left){
+                                            def-&gt;left-&gt;next=temp-&gt;left;
+                                             def=temp;
+                                        }
+                                        else if(temp&&temp-&gt;right){
+                                            def-&gt;left-&gt;next=temp-&gt;right;
+                                             def=temp;
+                                        }
+                                       
+                                    }
+                                    else def=temp;
+                                    
+                                    
+                                }
+                                
+                                connect(root-&gt;left);
+                                connect(root-&gt;right);
+                                return root;
+                            }
+                        };                   
+                </pre>
+            </div>
+        </div> 
+    </div>
+    <div id="problem-46" class="container problem-46">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 46</h2>
+                <a href="https://leetcode.com/problems/sum-root-to-leaf-numbers/">Sum Root to Leaf Numbers</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void sumFind(TreeNode* root,int &sum,string s){
+                            if(root==NULL)
+                                return ;
+                            
+                            int i_val=root-&gt;val;
+                            s=s+to_string(i_val);
+                            sumFind(root-&gt;left,sum,s);
+                            sumFind(root-&gt;right,sum,s);
+                            if(root-&gt;left!=NULL||root-&gt;right!=NULL)
+                                return;
+                            else{
+                            sum=sum+stoi(s);
+                            return;
+                            }
+                        }
+                        int sumNumbers(TreeNode* root) {
+                            if(root==NULL)
+                                return 0;
+                            
+                            int sum=0;
+                            sumFind(root,sum,"");
+                            return sum;
+                            
+                            
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>
+
+                </i>
+                </p>
+                <pre>
+                    class Solution {
+                        public:
+                            int sum=0;
+                            int sumNumbers(TreeNode* root) {
+                                if(root==NULL)return 0;
+                                
+                                if(root-&gt;left==NULL&&root-&gt;right==NULL){
+                                    int data=sum*10+root-&gt;val;
+                                    return data;
+                                }
+                                sum=sum*10+root-&gt;val;
+                                int a=sumNumbers(root-&gt;left);
+                                int b=sumNumbers(root-&gt;right);
+                                sum/=10;
+                                return a+b;
+                            }
+                        };
+                </pre>
+            </div>
+         
+    </div>
+    </div>
+    <div id="problem-47" class="container problem-47">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 47</h2>
+                <a href="https://leetcode.com/problems/house-robber/">House Robber</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int check(vector&lt;int&gt;& nums,int n,vector&lt;int&gt; &dp){
+                            if(n&lt;=0)return 0;
+                           if(dp[n-1]!=-1)return dp[n-1];
+                            
+                            dp[n-1]=max(nums[n-1]+check(nums,n-2,dp),check(nums,n-1,dp));
+                            return dp[n-1];
+                        }
+                        int rob(vector&lt;int&gt;& nums) {
+                            vector&lt;int&gt; dp(nums.size()+1,-1);
+                         return check(nums,nums.size(),dp);  
+                        }
+                    };
+                 </pre>
+             </div>
+         
+    </div>
+    </div>
+    <div id="problem-48" class="container problem-48">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 48</h2>
+                <a href="https://leetcode.com/problems/reverse-linked-list-ii/">Reverse Linked List II</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                    Reverse between the left and right.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        ListNode* reverseBetween(ListNode* head, int m, int n) {
+                            ListNode *temp,*curr,*prev=NULL;
+                            ListNode *start,*prev1=NULL;
+                            ListNode *dummy=new ListNode(0);
+                            dummy-&gt;next=head;
+                            curr=dummy;
+                            int k=m;
+                            while(k--){
+                                prev1=curr;
+                                curr=curr-&gt;next;
+                            }
+                            start=curr;
+                            int s=n-m+1;
+                            while(s--&&curr!=NULL){
+                                temp=curr-&gt;next;
+                                curr-&gt;next=prev;
+                                prev=curr;
+                                curr=temp;
+                            }
+                            if(prev1!=NULL)
+                            prev1-&gt;next=prev;
+                            
+                            start-&gt;next=curr;
+                            
+                            return dummy-&gt;next;
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                   
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                     ListNode* reverseBetween(ListNode* head, int left, int right) {
+                      if(head==NULL)return head;
+                      ListNode *dummy=new ListNode(-1);
+                      dummy-&gt;next=head;
+                      ListNode *temp=head,*def=head;
+                      ListNode *start=NULL,*end;
+                      
+                      int j=right;
+                      int flag=0;
+                      while(j--){
+                       if((right-left)!=j&&flag==0){
+                        start=temp;
+                        temp=temp-&gt;next;
+                       }
+                       else flag=1;
+                       
+                       if(j&gt;=1)
+                       def=def-&gt;next;
+                      }
+                      if(start)start-&gt;next=def;
+                      else dummy-&gt;next=def;
+                      ListNode *prev=def-&gt;next;
+                      ListNode *nexti=temp;
+                      while(prev!=def){
+                       nexti=nexti-&gt;next;
+                       temp-&gt;next=prev;
+                       prev=temp;
+                       temp=nexti;
+                      }
+                      return dummy-&gt;next;
+                     }
+                    };
+                 </pre>
+             </div>
+            
+         
+     </div>
+    </div>
+    <div id="problem-49" class="container problem-49">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 49</h2>
+                <a href="https://leetcode.com/problems/rotate-list/">Rotate List</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+             
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(k==0||head==NULL)
+            return head;
+        
+     ListNode* temp=head,*def=head;
+        int count=1;
+        while(temp->next!=NULL){
+            temp=temp->next;
+            count++;
+        }
+        if(k>=count)
+            k=k%count;
+        
+        if(k==0)
+            return head;
+        
+        int s=count-k-1;
+        while(def!=NULL&&s--){
+            def=def->next;
+        }
+        temp->next=head;
+        head=def->next;
+        def->next=NULL;
+        
+        return head;
+    }
+};
+                 </pre>
+             </div>
+         
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+             
+                class Solution {
+                    public:
+                        ListNode* rotateRight(ListNode* head, int k) {
+                            if(head==NULL)return head;
+                            
+                            ListNode *temp=head,*prev=NULL;
+                            int count=0;
+                            while(temp!=NULL){
+                                count++;
+                                prev=temp;
+                                temp=temp->next;
+                            }
+                            if(k%count==0)return head;
+                            int dis=(count-k%count)+1;
+                            if(prev)prev->next=head;
+                            temp=head;
+                            while(dis>1){
+                                prev=temp;
+                                temp=temp->next;
+                                dis--;
+                            }
+                            prev->next=NULL;
+                            return temp;
+                        }
+                    };
+                 </pre>
+             </div>
+    </div>
+    </div>
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode10.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode12.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-50" class="btn  btn-lg" role="button" aria-disabled="true">Delete Node in a BST</a>
+                <a style="color:white;" href="#problem-51" class="btn  btn-lg" role="button" aria-disabled="true">Coin Change</a>
+                <a style="color:white;" href="#problem-52" class="btn  btn-lg" role="button" aria-disabled="true">Merge Two Binary Trees</a>
+                <a style="color:white;" href="#problem-53" class="btn  btn-lg" role="button" aria-disabled="true">Coin Change 2</a>
+                <a style="color:white;" href="#problem-54" class="btn  btn-lg" role="button" aria-disabled="true">Subtree of Another Tree</a>
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode11.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode13.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-50" class="container problem-50">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 50</h2>
+                <a href="https://leetcode.com/problems/delete-node-in-a-bst/">Delete Node in a BST</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>
+
+               </i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        TreeNode* findPos(TreeNode *temp){
+                          
+                            
+                            while(temp!=NULL&&temp->right!=NULL)
+                                temp=temp->right;
+                            
+                            return temp;
+                        }
+                        TreeNode* deleteNodi(TreeNode* root,int key,TreeNode* rooti){
+                            if(root==NULL)
+                                return root;
+                            
+                            TreeNode* temp;
+                              if(key<root->val){
+                                deleteNodi(root->left,key,root);
+                            }
+                            else if(key==root->val){
+                                if(rooti==NULL)
+                                {
+                                    rooti=root->left;
+                                   temp=findPos(root->left);
+                                    if(temp!=NULL)
+                                    temp->right=root->right;
+                                    else
+                                    rooti=root->right;
+                                    
+                                    return rooti;
+                                }
+                                else if(rooti->val>root->val){
+                                    rooti->left=root->left;
+                                   
+                                    temp=findPos(rooti->left);
+                                    if(temp!=NULL)
+                                    temp->right=root->right;
+                                    else
+                                    rooti->left=root->right;
+                                    
+                                }
+                                else{
+                                    rooti->right=root->left;
+                                    temp=findPos(rooti->right);
+                                    if(temp!=NULL)
+                                    temp->right=root->right;
+                                    else
+                                    rooti->right=root->right;
+                                }
+                              
+                            }
+                            else
+                                deleteNodi(root->right,key,root);
+                            
+                            return root;
+                        }
+                        TreeNode* deleteNode(TreeNode* root, int key) {
+                            if(root==NULL)
+                                return root;
+                            
+                            return deleteNodi(root,key,NULL);
+                          
+                        }
+                    };
+
+                </pre>
+            </div>
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>
+                </i>
+                </p>
+                <pre>
+                    class Solution {
+                        public:
+                            TreeNode* deleteNode(TreeNode* root, int key) {
+                                if(root==NULL)return root;
+                                
+                                if(root->val<key){
+                                    root->right=deleteNode(root->right,key);
+                                    
+                                }
+                                else if(root->val>key){
+                                    root->left=deleteNode(root->left,key);
+                                    
+                                }
+                                else{
+                                    if(root->right){
+                                        TreeNode *temp=root->right;
+                                        while(temp->left){
+                                            temp=temp->left;
+                                        }
+                                        temp->left=root->left;
+                                        return root->right;
+                                    }
+                                    else return root->left;
+                                }
+                               return root;
+                            }
+                        };  
+                </pre>
+            </div>
+        </div> 
+    </div>
+    <div id="problem-51" class="container problem-51">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 51</h2>
+                <a href="https://leetcode.com/problems/coin-change/">Coin Change</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Recursion + memoization.This is the question of unbounded knapsack.we can take
+                    same number many times.
+                    Base condition if amount=0 then we do not take any coin.
+                    so if we have coins assume we have 5 coins of different number but the amount that
+                    we have to choose is equal to zero.so we do not take any coin.so we return 0.
+                    second condition:-when our n=0 and amount is greater then zero then it means we do 
+                    not have sufficient coin to make the desire amount.so we return maximum ways of making 
+                    amount using those coins.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int find(vector &lt;int &gt; &coins,vector &lt;vector &lt;int &gt; &gt; &dp,int amount,int n){
+                            if(amount==0)return 0;
+                            else if((n &lt;=0&&amount &gt;0)||amount &lt;0)return 100001;
+                            
+                            if(dp[n-1][amount]!=-1)return dp[n-1][amount];
+                            
+                            if(coins[n-1] &lt;=amount){
+                                dp[n-1][amount]=min(1+find(coins,dp,amount-coins[n-1],n),find(coins,dp,amount,n-1));
+                            }
+                            else 
+                                dp[n-1][amount]=find(coins,dp,amount,n-1);
+                            
+                            return dp[n-1][amount];
+                            
+                        }
+                        int coinChange(vector &lt;int &gt;& coins, int amount) {
+                            int n=coins.size();
+                            vector &lt;vector &lt;int &gt; &gt; dp(n+1,(vector &lt;int &gt;(amount+1,-1)));
+                            int res=find(coins,dp,amount,n);
+                            if(res &gt;=10001)return -1;
+                            else return res;
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>
+                   Bottom up approch.
+                </i>
+                </p>
+                <pre>
+                    class Solution {
+                        public:
+                            int coinChange(vector &lt;int &gt;& coins, int amount) {
+                               int n=coins.size();
+                             
+                                int dp[n+1][amount+1];
+                                for(int i=0;i &lt;=n;i++){
+                                    for(int j=0;j &lt;=amount;j++){
+                                        if(i==0&&j &gt;0)
+                                            dp[i][j]=10001;
+                                        else if(j==0)
+                                            dp[i][j]=0;
+                                        else if(coins[i-1] &lt;=j){
+                                            dp[i][j]=min(1+dp[i][j-coins[i-1]],dp[i-1][j]);
+                                        }
+                                        else
+                                            dp[i][j]=dp[i-1][j];
+                                    }
+                                   
+                                }
+                                if(dp[n][amount] &gt;=10001)
+                                    return -1;
+                                else
+                                 return dp[n][amount];
+                            }
+                            
+                        };
+                </pre>
+            </div>
+         
+    </div>
+    </div>
+    <div id="problem-52" class="container problem-52">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 52</h2>
+                <a href="https://leetcode.com/problems/merge-two-binary-trees/">Merge Two Binary Trees</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+                            if(root1==NULL&&root2==NULL)return NULL;
+                            
+                            if(root1&&root2)root1- &gt;val+=root2- &gt;val;
+                            else if(!root1&&root2)return root2;
+                            else if(root1&&!root2)return root1;
+                            
+                            root1- &gt;left=mergeTrees(root1- &gt;left,root2- &gt;left);
+                            root1- &gt;right=mergeTrees(root1- &gt;right,root2- &gt;right);
+                            return root1;
+                        }
+                    };
+                 </pre>
+             </div>
+         
+    </div>
+    </div>
+    <div id="problem-53" class="container problem-53">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 53</h2>
+                <a href="https://leetcode.com/problems/coin-change-2/">Coin Change 2</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                    
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int change(int amount, vector &lt;int &gt;& coins) {
+                             int n=coins.size();
+                               int dp[n+1][amount+1];
+                            for(int i=0;i &lt;=n;i++){
+                                for(int j=0;j &lt;=amount;j++){
+                                    if(i==0&&j &gt;0)
+                                        dp[i][j]=0;
+                                    else if(j==0)
+                                        dp[i][j]=1;
+                                    else if(coins[i-1] &lt;=j){
+                                        dp[i][j]=dp[i-1][j]+
+                                                    dp[i][j-coins[i-1]];
+                                    }
+                                    else
+                                        dp[i][j]=dp[i-1][j];
+                                }
+                               
+                            }
+                         
+                             return dp[n][amount];
+                        }
+                        
+                    };
+                 </pre>
+             </div> 
+     </div>
+    </div>
+    <div id="problem-54" class="container problem-54">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 54</h2>
+                <a href="https://leetcode.com/problems/subtree-of-another-tree/">Subtree of Another Tree</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                    Treat every node as root and check differently.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        bool check(TreeNode *s,TreeNode *t){
+                            if(s==NULL&&t==NULL)return true;
+                            else if(s==NULL||t==NULL)return false;
+                            
+                            if(s- &gt;val==t- &gt;val&&check(s- &gt;left,t- &gt;left)&&check(s- &gt;right,t- &gt;right))return true;
+                            else return false;
+                        }
+                        bool isSubtree(TreeNode* s, TreeNode* t) {
+                            if(s==NULL)return false;
+                            
+                            if(check(s,t)||isSubtree(s- &gt;left,t)||isSubtree(s- &gt;right,t))
+                                return true;
+                            else return false;
+                        }
+                    };
+                 </pre>
+             </div>
+
+    </div>
+    </div>
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode11.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode13.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 

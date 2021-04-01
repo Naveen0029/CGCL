@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-58" class="btn  btn-lg" role="button" aria-disabled="true">Longest Substring with At Least K Repeating Characters</a>
+                <a style="color:white;" href="#problem-59" class="btn  btn-lg" role="button" aria-disabled="true">Number of Islands</a>
+                <a style="color:white;" href="#problem-60" class="btn  btn-lg" role="button" aria-disabled="true">Letter Case Permutation</a>
+                <a style="color:white;" href="#problem-61" class="btn  btn-lg" role="button" aria-disabled="true">Task Scheduler</a>
+               
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode13.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode15.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-58" class="container problem-58">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 58</h2>
+                <a href="https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/">Longest Substring with At Least K Repeating Characters</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>
+              
+               </i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        int check(string s,int start,int end,char c){
+                            for(int i=start;i&lt;=end;i++)
+                                if(s[i]==c)
+                                    return i;
+                               
+                            return 0;
+                        }
+                        int longest(string s,int start,int end,int k){
+                            if(start&gt;=end)
+                                return INT_MIN;
+                            
+                            map&lt;char,int&gt; mp;
+                            for(int i=start;i&lt;=end;i++){
+                                mp[s[i]]++;
+                            }
+                            int flag=0;
+                            int index;
+                            for(auto itr=mp.begin();itr!=mp.end();itr++){
+                                if(itr-&gt;second&lt;k)
+                                {
+                                    flag=1;
+                                    char c=itr-&gt;first;
+                                    index=check(s,start,end,c);
+                                }
+                            }
+                            if(flag==0)
+                                return end-start+1;
+                            
+                          
+                            return max(longest(s,start,index-1,k),longest(s,index+1,end,k));
+                        }
+                        int longestSubstring(string s, int k) {
+                            if(k==1)
+                                return s.size();
+                            
+                            int d=longest(s,0,s.size()-1,k);
+                            if(d==INT_MIN)
+                            return 0;
+                            else return d;
+                        }
+                    };
+                </pre>
+            </div>
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm </h3>
+                <p><i>
+                </i>
+                </p>
+                <pre>
+                    class Solution {
+                        public:
+                            int check(string s,int k){
+                                if(s.size()==0)return 0;
+                                
+                                    map&lt;char,int&gt; mp;
+                                   for(int i=0;i&lt;s.size();i++){
+                                      mp[s[i]]++;
+                                    }
+                                
+                                
+                                for(int i=0;i&lt;s.size();i++){
+                                    if(mp.find(s[i])!=mp.end()&&mp[s[i]]&lt;k){
+                                        return max(check(s.substr(0,i),k),
+                                                  check(s.substr(i+1),k));
+                                    }
+                                }
+                                return s.size();
+                            }
+                            int longestSubstring(string s, int k) {
+                                if(s.size()==0)return 0;
+                               
+                             
+                                return check(s,k);
+                            }
+                        };
+                </pre>
+            </div>
+        </div> 
+    </div>
+    <div id="problem-59" class="container problem-59">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 59</h2>
+                <a href="https://leetcode.com/problems/number-of-islands/">Number of Islands</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>DFS
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void dfs(int i,int j,int n,int m,vector&lt;vector&lt;char&gt;&gt; &grid){
+                            if(i&lt;0||j&lt;0||i&gt;=n||j&gt;=m)
+                                return;
+                            
+                            if(grid[i][j]=='0')
+                                return;
+                            
+                            grid[i][j]='0';
+                            dfs(i+1,j,n,m,grid);
+                            dfs(i-1,j,n,m,grid);
+                            dfs(i,j+1,n,m,grid);
+                            dfs(i,j-1,n,m,grid);
+                            
+                            return;
+                        }
+                        int numIslands(vector&lt;vector&lt;char&gt;&gt;& grid) {
+                            int n=grid.size();
+                            int m=grid[0].size();
+                            int count=0;
+                            for(int i=0;i&lt;n;i++){
+                                for(int j=0;j&lt;m;j++){
+                                    if(grid[i][j]=='1')
+                                    {
+                                        dfs(i,j,n,m,grid);
+                                        count++;
+                                    }
+                                }
+                            }
+                            return count;
+                        }
+                    };
+                 </pre>
+             </div>
+             
+         
+    </div>
+    </div>
+    <div id="problem-60" class="container problem-60">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 60</h2>
+                <a href="https://leetcode.com/problems/letter-case-permutation/">Letter Case Permutation</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                   First go to end point and after that start checking.if value is numeric then
+                   simply return else change it(uppercase to lowercase and lowercase to uppercase)
+                   then push it into vector and then again go to the end point.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void Backtracking(string s,int index,vector&lt;string&gt; &v){
+                            if(index&gt;=s.size())
+                                return ;
+                            
+                            Backtracking(s,index+1,v);
+                            if(s[index]&gt;='a'&&s[index]&lt;='z'){
+                                int ascii=s[index];
+                                ascii=ascii-32;
+                                s[index]=ascii;
+                                v.push_back(s);
+                                Backtracking(s,index+1,v);
+                                return ;
+                            }
+                             else if(s[index]&gt;='A'&&s[index]&lt;='Z'){
+                                int ascii=s[index];
+                                ascii=ascii+32;
+                                s[index]=ascii;
+                                v.push_back(s);
+                                 Backtracking(s,index+1,v);
+                                return ;
+                            }
+                            else return;
+                        }
+                        vector&lt;string&gt; letterCasePermutation(string S) {
+                         
+                             vector&lt;string&gt; v;
+                            v.push_back(S);
+                            Backtracking(S,0,v);
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                   
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void Backtrack(string s,string str,vector&lt;string&gt;&v){
+                            if(s.size()==0){
+                                v.push_back(str);
+                                return ;
+                            }
+                            string k=s.substr(1);
+                            if(s[0]&gt;='a'&&s[0]&lt;='z'){
+                                Backtrack(k,str+s[0],v);
+                                Backtrack(k,str+char(s[0]-32),v);
+                            }
+                            else if(s[0]&gt;='A'&&s[0]&lt;='Z'){
+                                Backtrack(k,str+s[0],v);
+                                Backtrack(k,str+char(s[0]+32),v);
+                            }
+                            else{
+                                Backtrack(k,str+s[0],v);
+                            }
+                        }
+                        vector&lt;string&gt; letterCasePermutation(string S) {
+                            vector&lt;string&gt; v;
+                            Backtrack(S,"",v);
+                            return v;
+                         }
+                    };
+                 </pre>
+             </div>
+         
+    </div>
+    </div>
+    <div id="problem-61" class="container problem-61">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 61</h2>
+                <a href="https://leetcode.com/problems/task-scheduler/">Task Scheduler</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>We just have to count number of groups. a b - a b - ab.
+                    in this their is two group of length three 2*3+2.
+                </i>
+                </p>
+             <pre>class Solution {
+                public:
+                    int leastInterval(vector&lt;char&gt;& tasks, int n) {
+                        int l=tasks.size();
+                        if(n==0||l==1)
+                            return l;
+                    
+                        map&lt;char,int&gt; mp;
+                        for(int i=0;i&lt;l;i++){
+                            mp[tasks[i]]++;
+                        }
+                        
+                        int max_freq=INT_MIN;
+                        for(auto itr=mp.begin();itr!=mp.end();itr++){
+                          
+                            max_freq=max(max_freq,itr-&gt;second);
+                        }
+                        int count=(max_freq-1)*(n+1);
+                       
+                       for(auto it=mp.begin();it!=mp.end();it++){
+                           if(max_freq==it-&gt;second)
+                               count++;
+                       }
+                        return max(l,count);
+                    }
+                };
+                 </pre>
+             </div>
+             
+         
+    </div>
+    </div>
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode13.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode15.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 

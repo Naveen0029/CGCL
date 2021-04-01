@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-62" class="btn  btn-lg" role="button" aria-disabled="true">Letter Combinations of a Phone Number</a>
+                <a style="color:white;" href="#problem-63" class="btn  btn-lg" role="button" aria-disabled="true">Number of Closed Islands</a>
+                <a style="color:white;" href="#problem-64" class="btn  btn-lg" role="button" aria-disabled="true">Largest Number</a>
+                <a style="color:white;" href="#problem-65" class="btn  btn-lg" role="button" aria-disabled="true">Combination Sum</a>
+                <a style="color:white;" href="#problem-66" class="btn  btn-lg" role="button" aria-disabled="true">Clone Graph</a>
+               
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode14.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode16.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-62" class="container problem-62">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 62</h2>
+                <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/">Letter Combinations of a Phone Number</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i><pre>Try to make tree like      
+                                    -
+                          a         b        c 
+                    d   e   f     d  e  f   d  e  f 
+                - - -   so on</pre>
+              
+               </i>
+               </p>
+            <pre>class Solution {
+                public:
+                    
+                    void Backtracking(string &digits,string s,vector&lt;string&gt; &mp,vector&lt;string&gt; &v,int index){
+                        if(digits.size()&lt;=index)
+                        {
+                            v.push_back(s);
+                            return;
+                        }
+                           
+                        int l=digits[index]-'0';
+                           string t=mp[l]; 
+                            for(int j=0;j&lt;t.size();j++){
+                                s=s+t[j];
+                                Backtracking(digits,s,mp,v,index+1);
+                               // s=s.substr(0,s.size()-1);
+                                s.erase(s.size()-1);
+                            }
+                        
+                        return ;
+                    }
+                    vector&lt;string&gt; letterCombinations(string digits) {
+                       if(digits.size()==0)
+                           return {};
+                       vector&lt;string&gt;mp= {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}; 
+                        vector&lt;string&gt; v;
+                        Backtracking(digits,"",mp,v,0);
+                        return v;
+                    }
+                };
+                </pre>
+            </div>
+          
+        </div> 
+    </div>
+    <div id="problem-63" class="container problem-63">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 63</h2>
+                <a href="https://leetcode.com/problems/number-of-closed-islands/">Number of Closed Islands</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Make the dfs call to the all 0s which are connected to the border 0's.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void dfs(int i,int j,vector&lt;vector&lt;int&gt;&gt; &grid){
+                            if(i&lt;0||j&lt;0||i&gt;=grid.size()||j&gt;=grid[0].size()||grid[i][j]==1) return ;
+                            
+                            grid[i][j]=1;
+                            dfs(i-1,j,grid);
+                            dfs(i,j-1,grid);
+                            dfs(i+1,j,grid);
+                             dfs(i,j+1,grid);
+                            
+                            return ;
+                        }
+                        int closedIsland(vector&lt;vector&lt;int&gt;&gt;& grid) {
+                            int n=grid.size();
+                            int m=grid[0].size();
+                            for(int i=0;i&lt;m;i++){
+                                if(grid[0][i]==0){
+                                    dfs(0,i,grid);
+                                }
+                                if(grid[n-1][i]==0){
+                                    dfs(n-1,i,grid);
+                                }
+                            }
+                             for(int i=0;i&lt;n;i++){
+                                if(grid[i][0]==0){
+                                    dfs(i,0,grid);
+                                }
+                                if(grid[i][m-1]==0){
+                                    dfs(i,m-1,grid);
+                                }
+                            }
+                            int count=0;
+                            for(int i=0;i&lt;n;i++){
+                                for(int j=0;j&lt;m;j++){
+                                    if(grid[i][j]==0){
+                                          dfs(i,j,grid);
+                                          count++;
+                                    }     
+                                }
+                            }
+                            return count;
+                        }
+                    };
+                 </pre>
+             </div>
+             
+         
+    </div>
+    </div>
+    <div id="problem-64" class="container problem-64">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 64</h2>
+                <a href="https://leetcode.com/problems/largest-number/">Largest Number</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                   SORT and cancatenate the string for checking order.
+                   check a+b>b+a or not.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        string largestNumber(vector&lt;int&gt;& nums) {
+                            int n=nums.size();
+                            vector&lt;string&gt; v;
+                            for(int i=0;i&lt;n;i++){
+                                ostringstream str1;
+                                str1&lt;&lt;nums[i];
+                                string c=str1.str();
+                                v.push_back(c);
+                            }
+                            sort(v.begin(),v.end(),[](string &a,string &b){
+                               return a+b&gt;b+a;
+                            });
+                            if(v[0]=="0")
+                            return "0";
+                            
+                            string f="";
+                            
+                            for(int i=0;i&lt;v.size();i++){
+                                f=f+v[i];
+                            }
+                            return f;
+                        }
+                    };
+                 </pre>
+             </div>
+
+          
+         
+    </div>
+    </div>
+    <div id="problem-65" class="container problem-65">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 65</h2>
+                <a href="https://leetcode.com/problems/combination-sum/">Combination Sum</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Using Dynamic Programming
+                </i>
+                </p>
+             <pre>class Solution {
+                public:
+                     void check(vector&lt;int&gt;& candidates,int target,vector&lt;vector&lt;int&gt;&gt;&v,vector&lt;int&gt;rv,map&lt;vector&lt;int&gt;,int&gt;
+                                              &mp,int n){
+                         if(target&gt;0&&n&lt;=0)return ;
+                         if(target==0){
+                             if(mp.find(rv)==mp.end()){
+                                 v.push_back(rv);
+                                 mp[rv]++;
+                             }
+                             
+                             return ;
+                         }
+                         
+                         if(candidates[n-1]&lt;=target){
+                             rv.push_back(candidates[n-1]);
+                             check(candidates,target-candidates[n-1],v,rv,mp,n);
+                             rv.pop_back();
+                             check(candidates,target,v,rv,mp,n-1);
+                         }
+                         else check(candidates,target,v,rv,mp,n-1);
+                         
+                         return ;
+                     }
+                    vector&lt;vector&lt;int&gt;&gt; combinationSum(vector&lt;int&gt;& candidates, int target) {
+                        map&lt;vector&lt;int&gt;,int&gt; mp;
+                        vector&lt;vector&lt;int&gt;&gt; v;
+                        vector&lt;int&gt; rv;
+                        check(candidates,target,v,rv,mp,candidates.size());
+                        return v;
+                    }
+                };
+                 </pre>
+             </div>
+
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Using Backtracking.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void check(vector&lt;int&gt; &candidates,int target,int n,vector&lt;int&gt; rv,vector&lt;vector&lt;int&gt;&gt; &v,int index){
+                            if(target==0)
+                            {
+                                v.push_back(rv);
+                                return ;
+                            }
+                            if(target&lt;0)
+                                return;
+                            for(int i=index;i&lt;n;i++){
+                                rv.push_back(candidates[i]);
+                                check(candidates,target-candidates[i],n,rv,v,i);
+                                rv.pop_back();
+                            }
+                            return ;
+                            
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; combinationSum(vector&lt;int&gt;& candidates, int target) {
+                              if(target==0)
+                                return {};
+                            int n=candidates.size();
+                              vector&lt;vector&lt;int&gt;&gt; v;
+                             vector&lt;int&gt; rv;
+                            check(candidates,target,n,rv,v,0);
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+             
+         
+    </div>
+    </div>
+
+    <div id="problem-66" class="container problem-66">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 66</h2>
+                <a href="https://leetcode.com/problems/clone-graph/">Clone Graph    </a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Using DFS
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        Node* dfs(Node *node,map&lt;Node*,Node*&gt;&mp){
+                            if(mp.find(node)!=mp.end())
+                                return mp[node];
+                            
+                            mp[node]=new Node(node-&gt;val,{});
+                            for(Node *itr : node-&gt;neighbors){
+                                mp[node]-&gt;neighbors.push_back(dfs(itr,mp));
+                            }
+                            return mp[node];
+                        }
+                        Node* cloneGraph(Node* node) {
+                            if(node==NULL)return node;
+                            map&lt;Node*,Node*&gt;mp;
+                            return dfs(node,mp);
+                        }
+                    };
+                 </pre>
+             </div>
+
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Using BFS
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        Node* cloneGraph(Node* node) {
+                            if(node==NULL)
+                                return node;
+                            map&lt;Node*,Node*&gt; mp;
+                            queue&lt;Node* &gt;q;
+                            int vali=node-&gt;val;
+                          
+                            q.push(node);
+                            Node *head=new Node(vali,{});
+                            mp[node]=head;
+                            while(!q.empty()){
+                                Node *p=q.front();
+                               
+                                q.pop();
+                                for(Node* itr : p-&gt;neighbors){
+                                    if(mp.find(itr)==mp.end()){
+                                        mp[itr]=new Node(itr-&gt;val,{});
+                                        q.push(itr);
+                                        //mp[p-&gt;val]-&gt;neighbors.push_back();
+                                    }
+                                    mp[p]-&gt;neighbors.push_back(mp[itr]);
+                                }
+                            }
+                           return head;
+                        }
+                    };
+                 </pre>
+             </div>
+             
+         
+    </div>
+    </div>
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode14.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode16.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 
