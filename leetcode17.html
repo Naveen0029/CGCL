@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-71" class="btn  btn-lg" role="button" aria-disabled="true">Find the Town Judge</a>
+                <a style="color:white;" href="#problem-72" class="btn  btn-lg" role="button" aria-disabled="true"> All Paths From Source to Target</a>
+                <a style="color:white;" href="#problem-73" class="btn  btn-lg" role="button" aria-disabled="true">Count Negative Numbers in a Sorted Matrix</a>
+                <a style="color:white;" href="#problem-74" class="btn  btn-lg" role="button" aria-disabled="true">Merge Two Sorted Lists</a>
+                <a style="color:white;" href="#problem-75" class="btn  btn-lg" role="button" aria-disabled="true"></a>
+               
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode16.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode18.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-71" class="container problem-71">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 71</h2>
+                <a href="https://leetcode.com/problems/find-the-town-judge/">Find the Town Judge</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>
+                    calculate the in and out degree.if in degree==n-1 and outdegree is equal to zero return that
+                    index.
+               </i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        int findJudge(int N, vector&lt;vector&lt;int&gt;&gt;& trust) {
+                            if(trust.size()==0&&N==1)
+                                return 1;
+                            
+                            vector&lt;vector&lt;int&gt;&gt; v(N+1);
+                            for(int i=0;i&lt;trust.size();i++){
+                                v[trust[i][0]].push_back(trust[i][1]);
+                            }
+                            map&lt;int,int&gt; mp;
+                            for(int i=0;i&lt;trust.size();i++){
+                                mp[trust[i][1]]++;
+                            }
+                            int min_value=INT_MIN;
+                            int index=0;
+                            for(auto itr=mp.begin();itr!=mp.end();itr++){
+                                if(itr-&gt;second&gt;min_value)min_value=itr-&gt;second,index=itr-&gt;first;
+                                
+                            }
+                            if(v[index].size()!=0||min_value!=v.size()-2||trust.size()==0)
+                                return -1;
+                            else return index;
+                        }
+                    };
+                </pre>
+            </div>
+          
+        </div> 
+    </div>
+    <div id="problem-72" class="container problem-72">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 72</h2>
+                <a href="https://leetcode.com/problems/all-paths-from-source-to-target/"> All Paths From Source to Target</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        
+                        void dfs(int i,vector&lt;vector&lt;int&gt;&gt; &graph,vector&lt;int&gt;rv,vector&lt;vector&lt;int&gt;&gt; &v){
+                            rv.push_back(i);
+                            for(auto itr:graph[i]){
+                                dfs(itr,graph,rv,v);
+                            }
+                            if(i==graph.size()-1)
+                                v.push_back(rv);
+                            
+                            return ;
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; allPathsSourceTarget(vector&lt;vector&lt;int&gt;&gt;& graph) {
+                            vector&lt;int&gt; rv;
+                            vector&lt;vector&lt;int&gt;&gt; v;
+                            dfs(0,graph,rv,v);
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+            
+         
+    </div>
+    </div>
+    <div id="problem-73" class="container problem-73">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 73</h2>
+                <a href="https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/">Count Negative Numbers in a Sorted Matrix</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                   
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int isSafe(int i,int j,int m,int n){
+                            if(i&lt;0||i&gt;=m||j&lt;0||j&gt;=n)return 0;
+                            
+                            return 1;
+                        }
+                        int countNegatives(vector&lt;vector&lt;int&gt;&gt;& grid) {
+                            int m=grid.size();
+                            int n=grid[0].size();
+                            if(grid[m-1][n-1]&gt;=0)
+                                return 0;
+                            
+                            int count=0;
+                            queue&lt;pair&lt;int,int&gt;&gt; q;
+                            q.push(make_pair(m-1,n-1));
+                            while(!q.empty()){
+                                pair&lt;int,int&gt; p=q.front();
+                                q.pop();
+                                if(isSafe(p.first-1,p.second,m,n)&&grid[p.first-1][p.second]&lt;0){
+                                    q.push(make_pair(p.first-1,p.second));
+                                    grid[p.first-1][p.second]=0;
+                                }
+                                if(isSafe(p.first,p.second-1,m,n)&&grid[p.first][p.second-1]&lt;0){
+                                    q.push(make_pair(p.first,p.second-1));
+                                    grid[p.first][p.second-1]=0;
+                                }
+                                /*if(isSafe(p.first+1,p.second,m,n)&&grid[p.first+1][p.second]&lt;0){
+                                    q.push(make_pair(p.first+1,p.second));
+                                    grid[p.first+1][p.second]=0;
+                                }
+                                 if(isSafe(p.first,p.second+1,m,n)&&grid[p.first][p.second+1]&lt;0){
+                                    q.push(make_pair(p.first,p.second+1));
+                                    grid[p.first][p.second+1]=0;
+                                }*/
+                                count++;    
+                            }
+                            return count;
+                        }
+                    };
+                 </pre>
+             </div>
+
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                   
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int countNegatives(vector&lt;vector&lt;int&gt;&gt;& grid) {
+                            int m=grid.size()-1;
+                            int n=grid[0].size()-1;
+                            if(grid[m][n]&gt;0)
+                                return 0;
+                            
+                            int count=0;
+                            while(m&gt;=0&&grid[m][n]&lt;0){
+                                for(int j=n-1;j&gt;=0;j--){
+                                    if(grid[m][j]&lt;0)count++;
+                                    else break;
+                                }
+                                count++;
+                                m--;
+                            }
+                            return count;
+                        }
+                    };
+                 </pre>
+             </div>
+          
+         
+    </div>
+    </div>
+    <div id="problem-74" class="container problem-74">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 74</h2>
+                <a href="https://leetcode.com/problems/merge-two-sorted-lists/">Merge Two Sorted Lists</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+                            ListNode *dummy=new ListNode(0);
+                            ListNode *head=dummy;
+                            while(l1!=NULL&&l2!=NULL){
+                                if(l1-&gt;val&lt;=l2-&gt;val){
+                                    head-&gt;next=l1;
+                                    head=head-&gt;next;
+                                    l1=l1-&gt;next;
+                                }
+                                else{
+                                    head-&gt;next=l2;
+                                    head=head-&gt;next;
+                                    l2=l2-&gt;next;
+                                }
+                            }
+                            while(l1!=NULL){
+                                head-&gt;next=l1;
+                                head=head-&gt;next;
+                                l1=l1-&gt;next;
+                            }
+                            while(l2!=NULL){
+                                head-&gt;next=l2;
+                                head=head-&gt;next;
+                               l2=l2-&gt;next;
+                            }
+                            return dummy-&gt;next;
+                        }
+                    };
+                 </pre>
+             </div>
+
+           
+                <div class="col-12 col-sm-6">
+                    <h3>Algorithm</h3>
+                    <p><i>
+                    </i>
+                    </p>
+                 <pre>class Solution {
+                    public:
+                        ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+                            ListNode *dummy=new ListNode(0);
+                            ListNode *head=dummy;
+                            while(l1!=NULL&&l2!=NULL){
+                                if(l1-&gt;val&lt;=l2-&gt;val){
+                                    head-&gt;next=l1;
+                                    head=head-&gt;next;
+                                    l1=l1-&gt;next;
+                                }
+                                else{
+                                    head-&gt;next=l2;
+                                    head=head-&gt;next;
+                                    l2=l2-&gt;next;
+                                }
+                            }
+                            while(l1!=NULL){
+                                head-&gt;next=l1;
+                                head=head-&gt;next;
+                                l1=l1-&gt;next;
+                            }
+                            while(l2!=NULL){
+                                head-&gt;next=l2;
+                                head=head-&gt;next;
+                               l2=l2-&gt;next;
+                            }
+                            return dummy-&gt;next;
+                        }
+                    };
+                     </pre>
+                 </div>
+               
+
+    </div>
+    </div>
+
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode16.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode18.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 

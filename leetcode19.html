@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-80" class="btn  btn-lg" role="button" aria-disabled="true">The K Weakest Rows in a Matrix</a>
+                <a style="color:white;" href="#problem-81" class="btn  btn-lg" role="button" aria-disabled="true">Generate Parentheses</a>
+                <a style="color:white;" href="#problem-82" class="btn  btn-lg" role="button" aria-disabled="true">Permutations</a>
+                <a style="color:white;" href="#problem-83" class="btn  btn-lg" role="button" aria-disabled="true">Perfect Squares</a>
+                <a style="color:white;" href="#problem-84" class="btn  btn-lg" role="button" aria-disabled="true">Word Break</a>
+                <a style="color:white;" href="#problem-85" class="btn  btn-lg" role="button" aria-disabled="true">Add Two Numbers</a>
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode18.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode20.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-80" class="container problem-80">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 80</h2>
+                <a href="https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/">The K Weakest Rows in a Matrix</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>
+                count the number of soldiers and sort according to soldiers.
+               </i>
+               </p>
+            <pre>
+                bool comp(pair&lt;int,int&gt;&a,pair&lt;int,int&gt;&b){
+                    return a.second==b.second?a.first&lt;b.first:a.second&lt;b.second;
+                }
+                class Solution {
+                public:
+                    vector&lt;int&gt; kWeakestRows(vector&lt;vector&lt;int&gt;&gt;& mat, int k) {
+                        int n=mat.size();
+                        int m=mat[0].size();
+                        int count;
+                        map&lt;int,int&gt; mp;
+                        for(int i=0;i&lt;n;i++){
+                            count=0;
+                            for(int j=0;j&lt;m;j++){
+                                if(mat[i][j]==1)count++;
+                            }
+                            mp[i]=count;
+                        }
+                        vector&lt;pair&lt;int,int&gt;&gt; v;
+                        for(auto &it:mp){
+                            v.push_back(it);
+                        }
+                        sort(v.begin(),v.end(),comp);
+                        vector&lt;int&gt; vec;
+                        for(int i=0;i&lt;k;i++){
+                            vec.push_back(v[i].first);
+                        }
+                        return vec;
+                    }
+                };
+            </pre>
+            </div>
+          
+        </div> 
+    </div>
+    <div id="problem-81" class="container problem-81">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 81</h2>
+                <a href="https://leetcode.com/problems/generate-parentheses/">Generate Parentheses</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>if closed Parentheses is greater then return.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void Backtrack(int ob,int cb,string str,vector&lt;string&gt; &v){
+                            if(ob&gt;cb)return;
+                            if(ob==0){
+                                while(cb--)str+=")";
+                                
+                                v.push_back(str);
+                                return;
+                            }
+                            Backtrack(ob-1,cb,str+"(",v);
+                            Backtrack(ob,cb-1,str+")",v);
+                            return ;
+                        }
+                        vector&lt;string&gt; generateParenthesis(int n) {
+                            vector&lt;string&gt; v;
+                            Backtrack(n,n,"",v);
+                            return v;
+                        }
+                    }; 
+                 </pre>
+             </div>
+            
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void Backtrack(int n,int left,int right,vector&lt;string&gt; &v,string str){
+                            if(left==right&&right==n){
+                                v.push_back(str);
+                                return ;
+                            }
+                            if(left&lt;right)return;
+                            if(left&gt;n||right&gt;n)return;
+                            
+                            Backtrack(n,left+1,right,v,str+'(');
+                            Backtrack(n,left,right+1,v,str+')');
+                            return ;
+                            
+                            
+                        }
+                        vector&lt;string&gt; generateParenthesis(int n) {
+                            vector&lt;string&gt; v;
+                            Backtrack(n,0,0,v,"");
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+         
+    </div>
+    </div>
+    <div id="problem-82" class="container problem-82">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 82</h2>
+                <a href="https://leetcode.com/problems/permutations/">Permutations</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                   Take a visited array so that when the loop is running from index 0 and if the particluar index 
+                   is 1 then it is taken we just have to ignore it and move further.
+                   For the base we can take the s and we can also say that if the size of the rv vector is equal to 
+                   the size of nums array then this is the condition of termination.
+
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void Backtrack(vector&lt;int&gt; &nums,vector&lt;vector&lt;int&gt;&gt; &v,vector&lt;int&gt; rv,vector&lt;bool&gt; &visited,int s){
+                            if(s&gt;=nums.size()){
+                                v.push_back(rv);
+                                return;
+                            }
+                            for(int i=0;i&lt;nums.size();i++){
+                                if(!visited[i]){
+                                rv.push_back(nums[i]);
+                                visited[i]=true;
+                                Backtrack(nums,v,rv,visited,s+1);
+                                visited[i]=false;
+                                rv.pop_back();
+                                }
+                               
+                            }
+                            return ;
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; permute(vector&lt;int&gt;& nums) {
+                            vector&lt;int&gt; rv;
+                            vector&lt;vector&lt;int&gt;&gt; v;
+                            vector&lt;bool&gt; visited(nums.size(),false);
+                            Backtrack(nums,v,rv,visited,0);
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+
+    </div>
+    </div>
+    <div id="problem-83" class="container problem-83">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 83</h2>
+                <a href="https://leetcode.com/problems/perfect-squares/">Perfect Squares</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>First make the vector of the perfect square which is less than given number.
+                    After that it is just simple knapsack.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int solve(vector&lt;int&gt; &v,int n,int target,vector&lt;vector&lt;int&gt;&gt; &dp){
+                            if(target==0)
+                            {
+                             return 0;
+                            }
+                            else if(n==0&&target&gt;0){
+                                
+                                return 10000 ;
+                            }
+                            if(dp[n-1][target]!=-1)return dp[n-1][target];
+                            
+                            if(v[n-1]&lt;=target&&v[n-1]!=0)
+                                 dp[n-1][target]=min(1+solve(v,n,target-v[n-1],dp),solve(v,n-1,target,dp));
+                            
+                            else
+                                dp[n-1][target]=solve(v,n-1,target,dp);
+                                
+                            return dp[n-1][target];
+                                
+                        }
+                        int numSquares(int n) {
+                            vector&lt;int&gt; v;
+                            for(int i=1;i*i&lt;=n;i++){
+                                v.push_back(i*i);
+                            }
+                         
+                            vector&lt;vector&lt;int&gt;&gt;dp(v.size()+1,vector&lt;int&gt;(n+1,-1));
+                            return solve(v,v.size(),n,dp);
+                            
+                        }
+                    };
+                 </pre>
+             </div>
+
+           
+                <div class="col-12 col-sm-6">
+                    <h3>Algorithm</h3>
+                    <p><i>
+                        so at the place of 1+table[j-v[i]] we have another choice to use table[v[i]]+table[j-v[i]] 
+                        but for this first we have to mark the index(perfect square) with 1 and this can be done while 
+                        we are making vector of perfect square .we just say that table[i*i]=1.
+
+                        it give more feal then 1+table[j-v[i]] becaue for making 8.
+                        8=4+(8-4);
+                    </i>
+                    </p>
+                 <pre>
+                    class Solution {
+                        public:
+                            
+                            int numSquares(int n) {
+                                vector&lt;int&gt; v;
+                                for(int i=1;i*i&lt;=n;i++){
+                                    v.push_back(i*i);
+                                }
+                                vector&lt;int&gt; table(n+1,INT_MAX);
+                                table[0]=0;
+                                for(int i=0;i&lt;v.size();i++){
+                                    for(int j=v[i];j&lt;=n;j++){
+                                        table[j]=min(table[j],1+table[j-v[i]]);
+                                    }
+                                }
+                                return table[n];
+                            }
+                        };
+                     </pre>
+                 </div>
+               
+
+    </div>
+    </div>
+
+    <div id="problem-84" class="container problem-84">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 84</h2>
+                <a href="https://leetcode.com/problems/word-break/">Word Break</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Recursion+memo.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        map&lt;string,bool&gt; mp;
+                        bool finde(string s,vector&lt;string&gt; &wordDict){
+                            for(int i=0;i&lt;wordDict.size();i++){
+                                if(s==wordDict[i])
+                                    return true;
+                            }
+                            return false;
+                        }
+                        bool wordBreak(string s, vector&lt;string&gt;& wordDict) {
+                            if(s.size()==0)return true;
+                            
+                            if(mp.find(s)!=mp.end())
+                                return mp[s];
+                            
+                            for(int i=s.size();i&gt;=1;i--){
+                                if(finde(s.substr(0,i),wordDict)&&wordBreak(s.substr(i,s.size()-i),wordDict)){
+                                    mp[s.substr(0,i)]=true;
+                                    return true;
+                                }
+                            }
+                            mp[s]=false;
+                            return false;
+                        }
+                    };
+                 </pre>
+             </div>
+
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                    Bottom-up. </br>
+                    i=2&&j-(0,i-1);</br>
+                    dp[2]=dp[0]&&(0,2-0) if true break;</br>
+                    else dp[2]=dp[1]&&(1,2-1)if true break;</br>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        map&lt;string,bool&gt; mp;
+                        bool finde(string s,vector&lt;string&gt; &wordDict){
+                            for(int i=0;i&lt;wordDict.size();i++){
+                                if(s==wordDict[i])
+                                    return true;
+                            }
+                            return false;
+                        }
+                        bool wordBreak(string s, vector&lt;string&gt;& wordDict) {
+                            vector&lt;bool&gt; dp(s.size()+1,false);
+                            dp[0]=true;
+                            for(int i=0;i&lt;=s.size();i++){
+                                for(int j=0;j&lt;i;j++){
+                                    if(finde(s.substr(j,i-j),wordDict)&&dp[j]){
+                                    dp[i]=true;
+                                }
+                                }
+                            }
+                             return dp[s.size()];   
+                        }
+                    };
+                 </pre>
+             </div>
+
+    </div>
+    </div>
+
+    <div id="problem-85" class="container problem-85">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 85</h2>
+                <a href="https://leetcode.com/problems/add-two-numbers/">Add Two Numbers</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Recursion
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void makeList(ListNode* l1,ListNode *l2,ListNode *head,int &carry){
+                            if(!l1&&!l2)return ;
+                            
+                            if(l1&&l2){
+                               
+                                int sum=l1-&gt;val+l2-&gt;val+carry;
+                                if(sum&gt;=10){
+                                    sum=sum%10;
+                                    carry=1;
+                                }
+                                else carry=0;
+
+                                head-&gt;next=new ListNode(sum);
+                                makeList(l1-&gt;next,l2-&gt;next,head-&gt;next,carry);
+                            }
+                            else if(l1&&!l2){
+                                int sum=l1-&gt;val+carry;
+                                if(sum&gt;=10){
+                                    sum=sum%10;
+                                    carry=1;
+                                }
+                                else carry=0;
+                        
+                                head-&gt;next=new ListNode(sum);
+                               makeList(l1-&gt;next,l2,head-&gt;next,carry); 
+                            }
+                            else{
+                                int sum=l2-&gt;val+carry;
+                                if(sum&gt;=10){
+                                    sum=sum%10;
+                                    carry=1;
+                                }
+                                else carry=0;
+            
+                                head-&gt;next=new ListNode(sum);
+                               makeList(l1,l2-&gt;next,head-&gt;next,carry); 
+                            } 
+                            
+                            return ;
+                                
+                        }
+                        ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+                            ListNode *dummy=new ListNode(0);
+                            
+                            ListNode *head=dummy;
+                            int carry=0;
+                            makeList(l1,l2,dummy,carry);
+                            if(carry){
+                                while(head-&gt;next)head=head-&gt;next;
+                                
+                                head-&gt;next=new ListNode(carry);
+                            }
+                            return dummy-&gt;next;
+                        }
+                    };
+                 </pre>
+             </div>
+
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                    Iterative.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+                            ListNode *dummy=new ListNode(0);
+                            ListNode *head=dummy;
+                            int carry=0;
+                            int data;
+                            while(l1||l2){
+                                if(l1&&l2){
+                                    data=l1-&gt;val+l2-&gt;val+carry;
+                                    head-&gt;next=new ListNode(data%10);
+                                    head=head-&gt;next;
+                                    carry=(data&gt;=10?1:0);
+                                    
+                                }
+                                else if(l1&&!l2){
+                                     data=l1-&gt;val+carry;
+                                    head-&gt;next=new ListNode(data%10);
+                                    head=head-&gt;next;
+                                    carry=(data&gt;=10?1:0);
+                                }
+                                else{
+                                    data=l2-&gt;val+carry;
+                                    head-&gt;next=new ListNode(data%10);
+                                    head=head-&gt;next;
+                                    carry=(data&gt;=10?1:0);
+                                }
+                                if(l1)l1=l1-&gt;next;
+                                if(l2)l2=l2-&gt;next;
+                            }
+                            if(carry&gt;0)head-&gt;next=new ListNode(carry);
+                            return dummy-&gt;next;
+                        }
+                    };
+                 </pre>
+             </div>
+
+    </div>
+    </div>
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode18.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode20.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 

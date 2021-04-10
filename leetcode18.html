@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-75" class="btn  btn-lg" role="button" aria-disabled="true">Middle of the Linked List</a>
+                <a style="color:white;" href="#problem-76" class="btn  btn-lg" role="button" aria-disabled="true">Sort List</a>
+                <a style="color:white;" href="#problem-77" class="btn  btn-lg" role="button" aria-disabled="true">Merge k Sorted Lists</a>
+                <a style="color:white;" href="#problem-78" class="btn  btn-lg" role="button" aria-disabled="true">Binary Tree Pruning</a>
+                <a style="color:white;" href="#problem-79" class="btn  btn-lg" role="button" aria-disabled="true">Maximum Binary Tree</a>
+               
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode17.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode19.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-75" class="container problem-75">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 75</h2>
+                <a href="https://leetcode.com/problems/middle-of-the-linked-list/">Middle of the Linked List</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>
+                
+               </i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        ListNode* middleNode(ListNode* head) {
+                           ListNode *fast=head,*slow=head;
+                            while(fast!=NULL&&fast-&gt;next!=NULL){
+                                slow=slow-&gt;next;
+                                fast=fast-&gt;next-&gt;next;
+                            }
+                            return slow;
+                        }
+                    };
+                </pre>
+            </div>
+          
+        </div> 
+    </div>
+    <div id="problem-76" class="container problem-76">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 76</h2>
+                <a href="https://leetcode.com/problems/sort-list/">Sort List</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        ListNode *getMiddle(ListNode *head){
+                              ListNode *fast=head,*slow=head;
+                              ListNode *prev=NULL;
+                            while(fast!=NULL&&fast-&gt;next!=NULL){
+                              
+                                fast=fast-&gt;next-&gt;next;
+                                  if(fast==NULL||fast-&gt;next==NULL){
+                                      prev=slow;
+                                  }
+                                  slow=slow-&gt;next;
+                                  if(prev!=NULL)
+                                  prev-&gt;next=NULL;
+                               
+                            }
+                            return slow;
+                        }
+                        ListNode *merge(ListNode *l1,ListNode *l2){
+                            ListNode *temp;
+                            ListNode *dummy=new ListNode(0);
+                            ListNode *head=dummy;
+                            while(l1&&l2){
+                                if(l1-&gt;val&lt;l2-&gt;val){
+                                   
+                                    head-&gt;next=l1;
+                                    l1=l1-&gt;next;
+                                   
+                                }
+                                else{
+                                   
+                                    head-&gt;next=l2;
+                                    l2=l2-&gt;next;
+                                    
+                                }
+                                head=head-&gt;next;
+                            }
+                            if(l1)head-&gt;next=l1;
+                            else head-&gt;next=l2;
+                            
+                            return dummy-&gt;next;
+                        }
+                        ListNode* sortList(ListNode* head) {
+                            if(!head||!head-&gt;next)return head;
+                            ListNode *mid=getMiddle(head);
+                            ListNode *left=sortList(head);
+                            ListNode *right=sortList(mid);
+                            return merge(left,right);
+                            
+                        }
+                    };
+                        
+                 </pre>
+             </div>
+            
+         
+    </div>
+    </div>
+    <div id="problem-77" class="container problem-77">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 77</h2>
+                <a href="https://leetcode.com/problems/merge-k-sorted-lists/">Merge k Sorted Lists</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                   Merging the k lists in the 0th index.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        ListNode* mergeKLists(vector&lt;ListNode*&gt;& lists) {
+                            if(lists.size()==0)return NULL;
+                            
+                            ListNode *dummy=new ListNode(0);
+                           
+                            dummy-&gt;next=lists[0];
+                            for(int i=1;i&lt;lists.size();i++){
+                                lists[0]=dummy-&gt;next;
+                                 ListNode *head=dummy;
+                                while(lists[0]&&lists[i]){
+                                     if(lists[0]-&gt;val&lt;lists[i]-&gt;val){
+                                      head-&gt;next=lists[0];
+                                      head=head-&gt;next;
+                                      lists[0]=lists[0]-&gt;next;
+                                      } 
+                                    else{
+                                        head-&gt;next=lists[i];
+                                        head=head-&gt;next;
+                                        lists[i]=lists[i]-&gt;next;
+                                    }
+                                    
+                                }
+                                if(lists[0]){
+                                    head-&gt;next=lists[0];
+                                    head=head-&gt;next;
+                                }
+                                else if(lists[i]) {
+                                    head-&gt;next=lists[i];
+                                    head=head-&gt;next;
+                                }
+                               
+                            }
+                            
+                              return dummy-&gt;next;
+                        }
+                    };
+                 </pre>
+             </div>
+
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                   first merging 0th and 1th and then 2nd and 3rd and then 4th and 5th and so on.
+                   when one round is completed then now j=j*2 and merging take place until j is less than total size
+                   of the vector.
+                   when one round is completed then merge value of the list 0 and 1 is present on the index 0.
+                   so now we have to merge 0th and 2th thats why j=j*2. we have to merge list[i] and list[i+j].
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        ListNode* mergeKLists(vector&lt;ListNode*&gt;& lists) {
+                            if(lists.size()==0)return {};
+                            if(lists.size()==1)return lists[0];
+                            
+                            
+                           
+                            
+                            int j=1;
+                            int l=lists.size();
+                            while(j&lt;l){
+                                
+                               
+                                int i=0;
+                                while(i&lt;(lists.size()-j)){
+                               ListNode* head=new ListNode(0);
+                                ListNode *dummy=head;
+                                //merging
+                                while(lists[i]!=NULL&&lists[i+j]!=NULL){
+                                     if(lists[i]-&gt;val&lt;lists[i+j]-&gt;val){ 
+                                     dummy-&gt;next=lists[i];
+                                     lists[i]=lists[i]-&gt;next;
+                                         dummy=dummy-&gt;next;
+                                    }
+                                    else{
+                                    dummy-&gt;next=lists[i+j];
+                                    lists[i+j]=lists[i+j]-&gt;next;
+                                        dummy=dummy-&gt;next;
+                                    }
+                                
+                                }
+                                if(lists[i])dummy-&gt;next=lists[i];
+                                if(lists[i+j])dummy-&gt;next=lists[i+j];
+                               //merging done
+                                    
+                                lists[i]=head-&gt;next;  
+                                i=i+j*2;
+                                head-&gt;next=NULL;
+                              
+                               delete(head);
+                            }
+                               
+                                j=j*2;
+                            }
+                            
+                            return lists[0];  
+                        }
+                    };
+                 </pre>
+             </div>
+          
+         
+    </div>
+    </div>
+    <div id="problem-78" class="container problem-78">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 78</h2>
+                <a href="https://leetcode.com/problems/binary-tree-pruning/">Binary Tree Pruning</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>check every sutree.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        bool check(TreeNode* root){
+                            if(root==NULL)
+                                return  false;
+                            else if(root-&gt;val==1)
+                                return true;
+                            
+                            return check(root-&gt;left)||check(root-&gt;right);
+                        }
+                        TreeNode* pruneTree(TreeNode* root) {
+                            if(root==NULL)
+                                return root;
+                            
+                            if(!check(root))
+                                return NULL;
+                            root-&gt;left=pruneTree(root-&gt;left);
+                            root-&gt;right=pruneTree(root-&gt;right);
+                            
+                            return root;
+                        }
+                        
+                    };
+                 </pre>
+             </div>
+
+           
+                <div class="col-12 col-sm-6">
+                    <h3>Algorithm</h3>
+                    <p><i>
+                        postorder traversal.
+                    </i>
+                    </p>
+                 <pre>
+                    class Solution {
+                        public:
+                            TreeNode* pruneTree(TreeNode* root) {
+                                if(root==NULL)return root;
+                                
+                                root-&gt;left=pruneTree(root-&gt;left);
+                                root-&gt;right=pruneTree(root-&gt;right);
+                                
+                                if(!root-&gt;left&&!root-&gt;right&&root-&gt;val==0)return NULL;
+                                else return root;
+                                
+                            }
+                        };
+                     </pre>
+                 </div>
+               
+
+    </div>
+    </div>
+
+    <div id="problem-79" class="container problem-79">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 79</h2>
+                <a href="https://leetcode.com/problems/maximum-binary-tree/">Maximum Binary Tree</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int findMax(vector&lt;int&gt;&nums,int start,int end){
+                            int ans=INT_MIN;
+                            int res=0;
+                            for(int i=start;i&lt;end;i++){
+                                if(ans&lt;nums[i]){
+                                    ans=nums[i];
+                                    res=i;
+                                }
+                            }
+                            return res;
+                        }
+                        TreeNode *constructTree(vector&lt;int&gt; &nums,int start,int end){
+                            if(start&gt;=end)return NULL;
+                            
+                            int index=findMax(nums,start,end);
+                            TreeNode *root=new TreeNode(nums[index]);
+                            root-&gt;left=constructTree(nums,start,index);
+                            root-&gt;right=constructTree(nums,index+1,end);
+                            
+                            return root;
+                        }
+                        TreeNode* constructMaximumBinaryTree(vector&lt;int&gt;& nums) {
+                            return constructTree(nums,0,nums.size());
+                        }
+                    };
+                 </pre>
+             </div>
+
+    </div>
+    </div>
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode17.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode19.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 
