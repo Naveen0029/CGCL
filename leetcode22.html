@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-94" class="btn  btn-lg" role="button" aria-disabled="true">Subarray Sum Equals K</a>
+                <a style="color:white;" href="#problem-95" class="btn  btn-lg" role="button" aria-disabled="true">Daily Temperatures</a>
+                <a style="color:white;" href="#problem-96" class="btn  btn-lg" role="button" aria-disabled="true">Validate Binary Search Tree</a>
+                <a style="color:white;" href="#problem-97" class="btn  btn-lg" role="button" aria-disabled="true">Maximum Width of Binary Tree</a>
+                <a style="color:white;" href="#problem-97" class="btn  btn-lg" role="button" aria-disabled="true">Path Sum II</a>
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode21.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode23.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-94" class="container problem-90">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 94</h2>
+                <a href="https://leetcode.com/problems/subarray-sum-equals-k/">Subarray Sum Equals K</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>
+                The idea behind this approach is as follows: If the cumulative sum(represented by sum[i]sum[i] for sum up to i^{th}i 
+                thindex) up to two indices is the same, the sum of the elements lying in between those indices is zero. Extending the 
+                  same thought further, if the cumulative sum up to two indices, say i and j is at a difference of k i.e. if
+                  sum[i] - sum[j] = k, the sum of elements lying between indices i and j is k.
+               </br></br>
+                  orignal array 1 2 3
+            </br>commulative sum 1 3 6. sum[2]-sum[0]=5 and if we find the addition of original array 
+            from (0,2] we get 5.
+             Now  we can also write it like sum[i]-k=sum[j]. so we just find the sum[j] in the hasmap.
+               </i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        int subarraySum(vector&lt;int&gt;& nums, int k) {
+                            int count=0,sum=0;
+                            unordered_map&lt;int,int&gt; mp;
+                            mp[0]=1;
+                            for(int i=0;i&lt;nums.size();i++){
+                                sum=sum+nums[i];
+                                 if(mp.find(sum-k)!=mp.end()){
+                                     count=count+mp[sum-k];
+                                 }
+                                 mp[sum]++;
+                                
+                            }
+                            return count;
+                        }
+                    };
+            </pre>
+            </div>
+          
+        </div> 
+    </div>
+    <div id="problem-95" class="container problem-95">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 95</h2>
+                <a href="https://leetcode.com/problems/daily-temperatures/">Daily Temperatures</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>starting from first point.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        vector&lt;int&gt; dailyTemperatures(vector&lt;int&gt;& T) {
+                            stack&lt;pair&lt;int,int&gt;&gt; s;
+                            s.push(make_pair(0,T[0]));
+                            for(int i=1;i&lt;T.size();i++){
+                                auto p=s.top();
+                               while(!s.empty()&&p.second&lt;T[i]){
+                                   s.pop();
+                                   T[p.first]=i-p.first;
+                                   if(!s.empty())p=s.top();
+                               }
+                                s.push(make_pair(i,T[i]));
+                                
+                            }
+                            while(!s.empty()){
+                                auto p=s.top();
+                                T[p.first]=0;
+                                s.pop();
+                            }
+                            return T;
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>starting from ending point.
+                  </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        vector&lt;int&gt; dailyTemperatures(vector&lt;int&gt;& T) {
+                            stack&lt;pair&lt;int,int&gt;&gt; s;
+                            vector&lt;int&gt; v(T.size());
+                    
+                            for(int i=T.size()-1;i&gt;=0;i--){
+                             
+                                while(!s.empty()&&(s.top().first&lt;=T[i]))
+                                    s.pop();
+                                  
+                                v[i]=(s.empty()?0:(s.top().second-i));    
+                                s.push(make_pair(T[i],i));
+                            }
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+    </div>
+    </div>
+    <div id="problem-96" class="container problem-96">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 96</h2>
+                <a href="https://leetcode.com/problems/validate-binary-search-tree/">Validate Binary Search Tree</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        bool check(TreeNode* root,long min_val,long max_val){
+                            if(root==NULL)return true;
+                            if(root-&gt;val&gt;min_val&&root-&gt;val&lt;max_val&&check(root-&gt;left,min_val,root-&gt;val)&&check(root-&gt;right,root-&gt;val,max_val))return true;
+                            else return false;
+                        }
+                        bool isValidBST(TreeNode* root) {
+                            if(root==NULL)return true;
+                            
+                            return check(root,LONG_MIN,LONG_MAX);
+                            
+                        }
+                    };
+             </pre>
+             </div>
+
+    </div>
+    </div>
+    <div id="problem-97" class="container problem-97">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 97</h2>
+                <a href="https://leetcode.com/problems/maximum-width-of-binary-tree/">Maximum Width of Binary Tree</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                       specific level completely popped at single time.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int widthOfBinaryTree(TreeNode* root) {
+                            queue&lt;pair&lt;TreeNode*,unsigned int&gt;&gt; s;
+                            int max_val=-1;
+                            s.push(make_pair(root,0));
+                            while(!s.empty()){
+                                int size=s.size();
+                                int k=size;
+                                 int first=0,last=0;
+                                while(size--){
+                                    auto p=s.front();
+                                    s.pop();
+                                    if(p.first-&gt;left)s.push(make_pair(p.first-&gt;left,2*p.second+1));
+                                    if(p.first-&gt;right)s.push(make_pair(p.first-&gt;right,2*p.second+2));
+                                    
+                                   
+                                    if(size==k-1){
+                                        first=p.second;
+                                    }
+                                    if(size==0)last=p.second;
+                                    
+                                 
+                                    
+                                }
+                                   max_val=max(max_val,last-first+1);
+                                
+                            }
+                            return max_val;
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                      using indicator(-1,-1).
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int widthOfBinaryTree(TreeNode* root) {
+                            queue&lt;pair&lt;TreeNode*,unsigned int&gt;&gt; q;
+                            q.push(make_pair(root,0));
+                            TreeNode* dummy=new TreeNode(-1);
+                            q.push(make_pair(dummy,-1));
+                            unsigned int dist=LONG_MIN;
+                            unsigned int s=LONG_MAX;
+                            unsigned int m=LONG_MIN;
+                            while(!q.empty()){
+                                auto p=q.front();
+                                q.pop();
+                                 s=p.second&lt;s?p.second:s;
+                                 m=p.second&gt;m?p.second:m;
+                                auto d=q.front();
+                                
+                                if(p.first-&gt;left)
+                                    q.push(make_pair(p.first-&gt;left,2*p.second+1));
+                                if(p.first-&gt;right)
+                                    q.push(make_pair(p.first-&gt;right,2*p.second+2));
+                                if(d.second==-1){
+                                    dist=dist&gt;m-s+1?dist:m-s+1;
+                                    s=LONG_MAX;
+                                    m=LONG_MIN;
+                                    q.pop();
+                                    q.push(make_pair(dummy,-1));
+                                }
+                            }
+                            return dist;
+                        }
+                    };
+                 </pre>
+             </div>
+    </div>
+    </div>
+
+    <div id="problem-98" class="container problem-98">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 98</h2>
+                <a href="https://leetcode.com/problems/path-sum-ii/">Path Sum II</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                  
+                </i>
+                </p>
+             <pre>  
+class Solution {
+    public:
+        vector&lt;vector&lt;int&gt;&gt; v;
+        vector&lt;int&gt; rv;
+        vector&lt;vector&lt;int&gt;&gt; pathSum(TreeNode* root, int targetSum) {
+            if(root==NULL)return {};
+            if(root-&gt;left==NULL&&root-&gt;right==NULL){
+                if(root-&gt;val==targetSum){
+                    rv.push_back(targetSum);
+                    v.push_back(rv);
+                    rv.pop_back();
+                }
+                  
+                
+                return v;
+            }
+            rv.push_back(root-&gt;val);
+            pathSum(root-&gt;left,targetSum-root-&gt;val);
+            pathSum(root-&gt;right,targetSum-root-&gt;val);
+            rv.pop_back();
+    
+           
+            
+            return v;
+        }
+    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                      
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        bool check(TreeNode* root,int target,vector&lt;vector&lt;int&gt;&gt; &v,vector&lt;int&gt; rv){
+                           if(root==NULL)return false;
+                                if(root!=NULL&&root-&gt;left==NULL&&root-&gt;right==NULL){
+                                    if(target-root-&gt;val==0){
+                                   rv.push_back(root-&gt;val);
+                                v.push_back(rv);
+                                  
+                                return true;
+                            }
+                                else return false;
+                                }
+                            
+                           rv.push_back(root-&gt;val);
+                            bool left=check(root-&gt;left,target-root-&gt;val,v,rv);
+                            
+                            bool right=check(root-&gt;right,target-root-&gt;val,v,rv);
+                           
+                            
+                            return left||right;
+                            
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; pathSum(TreeNode* root, int targetSum) {
+                            vector&lt;vector&lt;int&gt;&gt; v;
+                            vector&lt;int&gt; rv;
+                            
+                            if(check(root,targetSum,v,rv))
+                                return v;
+                            
+                            return {};
+                        }
+                    };
+                 </pre>
+             </div>
+    </div>
+    </div>
+    
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode21.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode23.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 

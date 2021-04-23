@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-90" class="btn  btn-lg" role="button" aria-disabled="true">Sort Colors</a>
+                <a style="color:white;" href="#problem-91" class="btn  btn-lg" role="button" aria-disabled="true">Partition Labels</a>
+                <a style="color:white;" href="#problem-92" class="btn  btn-lg" role="button" aria-disabled="true">Minimum Operations to Make the Array Increasing</a>
+                <a style="color:white;" href="#problem-93" class="btn  btn-lg" role="button" aria-disabled="true">Maximum XOR for Each Query</a>
+               
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode20.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode22.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-90" class="container problem-90">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 90</h2>
+                <a href="https://leetcode.com/problems/sort-colors/">Sort Colors</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>
+                   low point to zeros and high point to two.  
+               </i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        
+                        void sortColors(vector&lt;int&gt;& nums) {
+                            int low=0,mid=0,high=nums.size()-1;
+                            while(mid&lt;=high){
+                                if(nums[mid]==0){
+                                    swap(nums[mid],nums[low]);
+                                    low++;
+                                    mid++;
+                                }
+                                else if(nums[mid]==2){
+                                    swap(nums[mid],nums[high]);
+                                    high--;
+                                }
+                                else{
+                                    mid++;
+                                }
+                            }
+                        }
+                    };
+            </pre>
+            </div>
+          
+        </div> 
+    </div>
+    <div id="problem-91" class="container problem-91">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 91</h2>
+                <a href="https://leetcode.com/problems/partition-labels/">Partition Labels</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>we are starting from ending point.By using rfind STL we find the last 
+                    repition of the index and we do this prcoes until we found our index then we come out 
+                    from the loop and push the size in the vector.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        vector&lt;int&gt; partitionLabels(string S) {
+                            vector&lt;int&gt; v;
+                            int i=S.size()-1;
+                            int siz=S.size()-1;
+                            int max_index=i;
+                            while(i&gt;=0){
+                                 while(i&gt;=max_index){
+                                     char str=S[i];
+                                     int found=S.rfind(str,i-1);
+                                     if(found!=string::npos){
+                                         max_index=min(max_index,found);
+                                         
+                                     }
+                                     i--;
+                                 }
+                                v.push_back((siz-max_index+1));
+                                siz=max_index-1;
+                                max_index=max_index-1;
+                                i=max_index;
+                            }
+                            reverse(v.begin(),v.end());
+                           return v;
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>So in this we are also finding the last occurrence of the character
+                    and whenever we reach to the index of the last occurence we push the size 
+                    into the vector and clear the string upto that index 
+                    why we are clearing the string?
+                </br>because we are always taking the index 0 of the character whose last index we are 
+                finding      </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int check(string s,int index,char st){
+                            int last_index=0;
+                            for(int i=0;i&lt;s.size();i++){
+                                if(s[i]==st)last_index=i;
+                            }
+                            return last_index;
+                        }
+                        vector&lt;int&gt; partitionLabels(string S) {
+                            if(S.size()==0)return {};
+                            int last_index=-1;
+                            vector&lt;int&gt; v;
+                            while(!S.empty()){
+                                for(int i=0;i&lt;S.size();i++){
+                                    int index=check(S,i,S[i]);
+                                    if(last_index&lt;index){
+                                        last_index=index;
+                                    }
+                                    if(i==last_index){
+                                        
+                                        v.push_back(last_index+1);
+                                        break;
+                                    }
+                                   
+                                }
+                                S=S.substr(last_index+1);
+                                last_index=-1;
+                            }
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+    </div>
+    </div>
+    <div id="problem-92" class="container problem-92">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 92</h2>
+                <a href="https://leetcode.com/contest/biweekly-contest-50/problems/minimum-operations-to-make-the-array-increasing/">Minimum Operations to Make the Array Increasing</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>if i+1th element is smaller than ith element then first set the size of 
+                    i+1th element equal to ith element and then add 1.And also find the number of
+                    time we must have to do operation to make it strictly increasing.  
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int minOperations(vector&lt;int&gt;& nums) {
+                            int cnt=0;
+                            for(int i=0;i&lt;nums.size()-1;i++){
+                                while(nums[i+1]&lt;=nums[i]){
+                                    
+                                    cnt+=(nums[i]-nums[i+1])+1;
+                                    nums[i+1]=nums[i]+1;
+                                }
+                            }
+                            return cnt;
+                        }
+                    };
+             </pre>
+             </div>
+
+    </div>
+    </div>
+    <div id="problem-93" class="container problem-93">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 93</h2>
+                <a href="https://leetcode.com/contest/biweekly-contest-50/problems/maximum-xor-for-each-query/">Maximum XOR for Each Query</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>First find the xor of all the elements.Now if we want to maximize the 
+                    xor of the number which is less than 2power k with the xor of all the elements 
+                    then we just have to flip all the bits of xor of all the elements upto given 
+                    maximumbit+1 because it would give maximized answer.
+
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        
+                    
+                    int fl(int N, int K)
+                    {
+                     
+                        // Stores (2 ^ K) - 1
+                        int X = (1 &lt;&lt; (K - 1)) - 1;
+                     
+                        // Update N
+                        N = X - N;
+                     
+                        // Print the answer
+                       return N;
+                    }
+                     
+                        vector&lt;int&gt; getMaximumXor(vector&lt;int&gt;& nums, int maximumBit) {
+                            int x=0;
+                            for(int i=0;i&lt;nums.size();i++){
+                                x=x^nums[i];
+                            }
+                             int fans;
+                            int k=(int)pow(2,maximumBit);
+                           
+                            vector&lt;int&gt; v;
+                            int n=nums.size();
+                            for(int i=0;i&lt;nums.size();i++){
+                                
+                                fans=fl(x,maximumBit+1);
+                                v.push_back(fans);
+                                x=x^nums[n-1];
+                                n--;
+                                
+                            }
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+    </div>
+    </div>
+
+    
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode20.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode22.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 
