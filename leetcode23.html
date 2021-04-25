@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-99" class="btn  btn-lg" role="button" aria-disabled="true">Surrounded Regions</a>
+                <a style="color:white;" href="#problem-100" class="btn  btn-lg" role="button" aria-disabled="true">Decode String</a>
+                <a style="color:white;" href="#problem-101" class="btn  btn-lg" role="button" aria-disabled="true">Domino and Tromino Tiling</a>
+                <a style="color:white;" href="#problem-102" class="btn  btn-lg" role="button" aria-disabled="true">Target Sum</a>
+                <a style="color:white;" href="#problem-103" class="btn  btn-lg" role="button" aria-disabled="true">Integer Break</a>
+                <a style="color:white;" href="#problem-104" class="btn  btn-lg" role="button" aria-disabled="true">Permutations II</a>
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode22.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode24.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-99" class="container problem-99">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 99</h2>
+                <a href="https://leetcode.com/problems/surrounded-regions/">Surrounded Regions</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>without using extra space. 
+               </i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        void dfs(vector&lt;vector&lt;char&gt;&gt;& board,int i,int j,int n,int m){
+                            if(i&lt;0||j&lt;0||i&gt;=n||j&gt;=m||board[i][j]!='O')return;
+                            
+                            board[i][j]='G';
+                            dfs(board,i+1,j,n,m);
+                            dfs(board,i,j+1,n,m);
+                            dfs(board,i-1,j,n,m);
+                            dfs(board,i,j-1,n,m);
+                            return;
+                        }
+                        void solve(vector&lt;vector&lt;char&gt;&gt;& board) {
+                            int n=board.size();
+                           
+                            int m=0;
+                            if(n!=0)m=board[0].size();
+                            if(n==0&&m==0)return;
+                            
+                            
+                            for(int i=0;i&lt;n;i++){
+                                if(board[i][0]=='O'){
+                                    dfs(board,i,0,n,m);
+                                }
+                                if(board[i][m-1]=='O'){
+                                     dfs(board,i,m-1,n,m);
+                                }
+                            }
+                            for(int j=0;j&lt;m;j++){
+                                if(board[0][j]=='O'){
+                                    dfs(board,0,j,n,m);
+                                }
+                                if(board[n-1][j]=='O'){
+                                     dfs(board,n-1,j,n,m);
+                                }
+                            }
+                            for(int i=0;i&lt;n;i++){
+                                for(int j=0;j&lt;m;j++){
+                                    if(board[i][j]=='G')board[i][j]='O';
+                                    else board[i][j]='X';
+                                }
+                            }
+                            return;
+                        }
+                    };
+            </pre>
+            </div>
+          
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>using extra space. 
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void dfs(int i,int j,vector&lt;vector&lt;char&gt;&gt;&board,vector&lt;vector&lt;char&gt;&gt;&mat,int n,int m){
+                            if(i&lt;0||i&gt;=n||j&lt;0||j&gt;=m||mat[i][j]=='O'||board[i][j]=='X')return;
+                            
+                            mat[i][j]='O';
+                            dfs(i+1,j,board,mat,n,m);
+                            dfs(i,j+1,board,mat,n,m);
+                            dfs(i-1,j,board,mat,n,m);
+                            dfs(i,j-1,board,mat,n,m);
+                        }
+                        void solve(vector&lt;vector&lt;char&gt;&gt;& board) {
+                            
+                            int n=board.size();
+                            int m=0;
+                            if(n!=0)m=board[0].size();
+                            if(n==0&&m==0)return;
+                            vector&lt;vector&lt;char&gt;&gt; mat(n,vector&lt;char&gt;(m,'X'));
+                            for(int i=0;i&lt;n;i++){
+                                if(board[i][0]=='O'&&mat[i][0]=='X'){
+                                    dfs(i,0,board,mat,n,m);
+                                }
+                                if(board[i][m-1]=='O'&&mat[i][m-1]=='X'){
+                                    dfs(i,m-1,board,mat,n,m);
+                                }
+                                
+                            }
+                            for(int j=0;j&lt;m;j++){
+                                if(board[0][j]=='O'&&mat[0][j]=='X'){
+                                    dfs(0,j,board,mat,n,m);
+                                }
+                                if(board[n-1][j]=='O'&&mat[n-1][j]=='X'){
+                                    dfs(n-1,j,board,mat,n,m);
+                                }
+                            }
+                            for(int i=0;i&lt;n;i++){
+                                for(int j=0;j&lt;m;j++){
+                                    if(board[i][j]=='O'||board[i][j]=='X')
+                                        board[i][j]=mat[i][j];
+                                }
+                            }
+                        }
+                    };
+             </pre>
+             </div>
+        </div> 
+    </div>
+    <div id="problem-100" class="container problem-100">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 100</h2>
+                <a href="https://leetcode.com/problems/decode-string/">Decode String</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>starting from first point.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        string decode(string &s,int &i){
+                            string result="";
+                            while(i&lt;s.length()&&s[i]!=']'){
+                                if(isdigit(s[i])){
+                                    int k=0;
+                                    while(i&lt;s.length()&&isdigit(s[i])){
+                                        k=k*10+s[i++]-'0';
+                                    }
+                                    i++;
+                                    string r=decode(s,i);
+                                    while(k--)result+=r;
+                                    i++;
+                                }else{
+                                    result+=s[i++];
+                                }
+                            }
+                            return result;
+                        }
+                        string decodeString(string s) {
+                            int i=0;
+                            return decode(s,i);
+                        }
+                    };
+                 </pre>
+             </div>
+             
+    </div>
+    </div>
+    <div id="problem-101" class="container problem-101">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 101</h2>
+                <a href="https://leetcode.com/problems/domino-and-tromino-tiling/">Domino and Tromino Tiling</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>So this is interesting question in which for n=3 the total number of ways are 5.
+                    How to think for the soln.
+                    first thing if there is 1*1 grid then how many ways to fill this ans the ans is 0.
+                    if their is 2*1 grid then number of ways is 1.
+                    if their is 2*2 grid then number of ways is 2.</br>
+                    0 1 2</br>
+                    1 2 5 </br>
+                    so u are able to see the pattern.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int mod=1000000007;
+                        int numTilings(int N) {
+                            if(N==1)return 1;
+                            
+                            int k=3;
+                            vector&lt;vector&lt;unsigned int&gt;&gt;dp(k,vector&lt;unsigned int&gt;(N+1,0));
+                            dp[1][1]=0;
+                            dp[2][1]=1;
+                            dp[1][2]=1;
+                            
+                                for(int j=2;j&lt;=N;j++){
+                                    for(int i=1;i&lt;=2;i++){
+                                        if(i==1&&dp[i][j]==0)dp[i][j]=((dp[i][j-1])%mod+(dp[i+1][j-2])%mod)%mod;
+                                        else if(i!=1){
+                                        dp[i][j]=((dp[i-1][j])%mod+(dp[i][j-1])%mod+(dp[i-1][j-1])%mod)%mod;
+                                        
+                                        }
+                                    }
+                                    
+                                }
+                            
+                            return dp[2][N];
+                        }
+                    };
+             </pre>
+             </div>
+
+    </div>
+    </div>
+    <div id="problem-102" class="container problem-102">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 102</h2>
+                <a href="https://leetcode.com/problems/target-sum/">Target Sum</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                      
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int Target(vector&lt;int&gt;& nums,int i,int cnt,int target,vector&lt;vector&lt;int&gt;&gt;&dp){
+                            if(cnt==target&&(i==nums.size()))return 1;
+                            else if(i&gt;=nums.size())return 0;
+                            
+                            if(dp[i][cnt+1000]!=-1)return dp[i][cnt+1000];
+                            
+                            return dp[i][cnt+1000]=Target(nums,i+1,cnt+nums[i],target,dp)+Target(nums,i+1,cnt-nums[i],target,dp);
+                        }
+                        int findTargetSumWays(vector&lt;int&gt;& nums, int target) {
+                            vector&lt;vector&lt;int&gt;&gt; dp(nums.size()+1,vector&lt;int&gt;(2001,-1));
+                            return Target(nums,0,0,target,dp);
+                        }
+                    };
+                 </pre>
+             </div>
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                      s1+s2=sum</br>
+                      s1-s2=target</br>
+                      2*s1=(target+sum)</br>
+                      so this is the variation of knapsack in which we have to find one subset only<br>
+                      [1,1,1,1,1] target=3<br>
+                      find all the subset whose total_sum is 4.<br>
+                      (5+3)/2=4.
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int findTargetSumWays(vector&lt;int&gt;& nums, int target) {
+                            int sum=0;
+                            for(int i=0;i&lt;nums.size();i++){
+                                sum+=nums[i];
+                            }
+                            if(sum&lt;target||(sum+target)%2!=0)return 0;
+                            int ft=(sum+target)/2;
+                            int dp[nums.size()+1][ft+1];
+                           
+                            for(int i=0;i&lt;=nums.size();i++){
+                                for(int j=0;j&lt;=ft;j++){
+                                    if(j==0&&i==0)dp[i][j]=1;
+                                    else if(i==0&&j&gt;0)dp[i][j]=0;
+                                    else if(nums[i-1]&lt;=j){
+                                        dp[i][j]=dp[i-1][j-nums[i-1]]+dp[i-1][j];
+                                    }
+                                    else dp[i][j]=dp[i-1][j];
+                                }
+                            }
+                            return dp[nums.size()][ft];
+                        }
+                    };
+                 </pre>
+             </div>
+    </div>
+    </div>
+
+    <div id="problem-103" class="container problem-103">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 103</h2>
+                <a href="https://leetcode.com/problems/integer-break/">Integer Break</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                  we can say all the numbers can be maked from 2 to 9 so we make vector of number from 2 to 9 
+                  then apply knapsack.but it is unbounded knapsack becuase we can take the same number multiple times.
+                </br>
+                  But their is an another approch in which we take all the numbers which is less than n.
+                  f(n)=k*(max(f(n-k),n-k)).
+                </i>
+                </p>
+             <pre>  
+                class Solution {
+                    public:
+                        void check(int sum,vector&lt;int&gt; &v,int res,int &f_r,int s){
+                            if(sum==0){
+                                f_r=max(f_r,res);
+                                return;
+                            }
+                            if(sum&lt;0||s&lt;=0)return;
+                            
+                            if(v[s-1]&lt;=sum){
+                                check(sum-v[s-1],v,res*v[s-1],f_r,s);
+                                check(sum,v,res,f_r,s-1);
+                            }
+                            else
+                                check(sum,v,res,f_r,s-1);
+                            
+                            return;
+                            
+                        }
+                        int integerBreak(int n) {
+                            if(n==2)return 1;
+                            if(n==3)return 2;
+                            int f_r=INT_MIN;
+                            int k=8;
+                            vector&lt;int&gt; v(k);
+                            int i=2;
+                            int j=0;
+                            while(i&lt;10){
+                                v[j++]=i;
+                                i++;
+                            }
+                            
+                            check(n,v,1,f_r,k);
+                            return f_r;
+                          
+                        }
+                    };
+                 </pre>
+             </div>
+             
+    </div>
+    </div>
+
+    <div id="problem-104" class="container problem-104">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 104</h2>
+                <a href="https://leetcode.com/problems/permutations-ii/">Permutations II</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                  using visiting vector and map.
+                  <br>
+                  <br>more references:-<br>
+                  <a href="https://leetcode.com/problems/permutations-ii/discuss/562948/C%2B%2B-backtracking-24ms-with-explainations-about-remove-duplicates">Ref 1</a><br>
+                  <a href="https://youtu.be/bRmYN2LiOxA">Ref 2</a><br>
+                </i>
+                </p>
+             <pre>  
+                class Solution {
+                    public:
+                        void Backtracking(vector&lt;int&gt;&nums,vector&lt;vector&lt;int&gt;&gt;&v,
+                                          vector&lt;int&gt;&rv,int n,map&lt;vector&lt;int&gt;,int&gt;&mp,int cnt,vector&lt;int&gt; &temp){
+                            if(cnt&gt;=nums.size()){
+                                if(mp.find(temp)==mp.end()){
+                                    mp[temp]++;
+                                    v.push_back(temp);
+                                }
+                                
+                                
+                                return;
+                            }
+                            for(int i=0;i&lt;n;i++){
+                                if(rv[i]==0){
+                                    rv[i]=1;
+                                    temp.push_back(nums[i]);
+                                    Backtracking(nums,v,rv,n,mp,cnt+1,temp);
+                                    temp.pop_back();
+                                    rv[i]=0;
+                                }
+                            }
+                            return ;
+                            
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; permuteUnique(vector&lt;int&gt;& nums) {
+                            vector&lt;int&gt; rv(nums.size(),0);
+                            vector&lt;vector&lt;int&gt;&gt; v;
+                            map&lt;vector&lt;int&gt;,int&gt; mp;
+                            vector&lt;int&gt; temp;
+                            Backtracking(nums,v,rv,nums.size(),mp,0,temp);
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+             
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                  using visiting vector and after sorting the nums array.
+                </i>
+                </p>
+             <pre>  
+                class Solution {
+                    public:
+                        void Backtracking(vector&lt;int&gt;&nums,vector&lt;vector&lt;int&gt;&gt;&v,
+                                          vector&lt;int&gt;&rv,int n,map&lt;vector&lt;int&gt;,int&gt;&mp,int cnt,vector&lt;int&gt; &temp){
+                            if(cnt&gt;=nums.size()){
+                                if(mp.find(temp)==mp.end()){
+                                    mp[temp]++;
+                                    v.push_back(temp);
+                                }
+                                return;
+                            }
+                            for(int i=0;i&lt;n;i++){
+                                if(rv[i]==0){
+                                    if(i!=0&&!rv[i-1]&&nums[i]==nums[i-1])continue;
+                                    
+                                    rv[i]=1;
+                                    temp.push_back(nums[i]);
+                                    Backtracking(nums,v,rv,n,mp,cnt+1,temp);
+                                    temp.pop_back();
+                                    rv[i]=0;
+                                }
+                            }
+                            return ;
+                            
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; permuteUnique(vector&lt;int&gt;& nums) {
+                            vector&lt;int&gt; rv(nums.size(),0);
+                            vector&lt;vector&lt;int&gt;&gt; v;
+                            map&lt;vector&lt;int&gt;,int&gt; mp;
+                            vector&lt;int&gt; temp;
+                            sort(nums.begin(),nums.end());
+                            Backtracking(nums,v,rv,nums.size(),mp,0,temp);
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+    </div>
+    </div>
+    
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode22.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode24.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 
