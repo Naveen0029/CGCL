@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-105" class="btn  btn-lg" role="button" aria-disabled="true">Remove K Digits</a>
+                <a style="color:white;" href="#problem-106" class="btn  btn-lg" role="button" aria-disabled="true">Combinations</a>
+                <a style="color:white;" href="#problem-107" class="btn  btn-lg" role="button" aria-disabled="true">Subsets</a>
+                <a style="color:white;" href="#problem-108" class="btn  btn-lg" role="button" aria-disabled="true">Restore IP Addresses</a>
+                <a style="color:white;" href="#problem-109" class="btn  btn-lg" role="button" aria-disabled="true">Split Array into Fibonacci Sequence</a>
+                <a style="color:white;" href="#problem-110" class="btn  btn-lg" role="button" aria-disabled="true">Single Number</a>
+                
+                
+             </div>
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode23.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode25.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-105" class="container problem-105">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 105</h2>
+                <a href="https://leetcode.com/problems/remove-k-digits/">Remove K Digits</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>
+                <a href="https://leetcode.com/problems/remove-k-digits/discuss/1027875/C%2B%2B.-Clear-and-cool-solution.-faster-than-100.00.-Stack.-Strings.">Ref 1</a><br>
+               </i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        string removeKdigits(string num, int k) {
+                            if(num.size()&lt;=k)return "0";
+                           int i=0;
+                            stack&lt;char&gt; s;
+                            while(i&lt;num.size()){
+                                while(!s.empty()&&k&gt;0&&(s.top()-'0')&gt;(num[i]-'0')&&s.top()!='0'){
+                                    s.pop();
+                                    k--;
+                                }
+                                
+                                s.push(num[i]);
+                                i++;
+                            }
+                            
+                            string str="";
+                            while(!s.empty()){
+                                str=s.top()+str;
+                                s.pop();
+                            }
+                            
+                           i=0;
+                            //for handling number starting from 0
+                           while(i&lt;str.size()){
+                                if(str[i]=='0')str.erase(i,1);
+                                else break;
+                            }
+                            
+                            if(str.size()&lt;=k)return "0";
+                            
+                            //for handling increasing order
+                            while(k&gt;0){
+                                str.pop_back();
+                                k--;
+                            }
+                            return str;
+                        }
+                    };
+            </pre>
+            </div>
+        </div> 
+    </div>
+    <div id="problem-106" class="container problem-106">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 106</h2>
+                <a href="https://leetcode.com/problems/combinations/">Combinations</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>n=6 k=4 <br>
+                    1234 1235 1236 1245 1246 1256 1345 1346 1356 1456 2345 2346 2356 2456 3456
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        
+                        void Backtrack(int index,int n,int k,vector&lt;int&gt; &rv,vector&lt;vector&lt;int&gt;&gt;&v){
+                            if(rv.size()==k){
+                                v.push_back(rv);
+                                return ;
+                            }
+                            for(int i=index;i&lt;=n;i++){
+                                rv.push_back(i);
+                                Backtrack(i+1,n,k,rv,v);
+                                rv.pop_back();
+                            }
+                            
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; combine(int n, int k) {
+                            vector&lt;int&gt; rv;
+                            vector&lt;vector&lt;int&gt;&gt; v;
+                            Backtrack(1,n,k,rv,v);
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+             
+    </div>
+    </div>
+    <div id="problem-107" class="container problem-107">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 107</h2>
+                <a href="https://leetcode.com/problems/subsets/">Subsets</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                    Using Backtracking.<br>
+                    <a href="https://leetcode.com/problems/subsets/discuss/940599/3-Approaches-for-your-interview-%2BDRY-RUN-iterative-recursive-bitmasking">Ref1</a><br>
+                
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        void Backtrack(vector&lt;int&gt;&nums,int index,vector&lt;int&gt; &rv,
+                                      vector&lt;vector&lt;int&gt;&gt;&v){
+                            for(int i=index;i&lt;nums.size();i++){
+                                rv.push_back(nums[i]);
+                                Backtrack(nums,i+1,rv,v);
+                                v.push_back(rv);
+                                rv.pop_back();
+                                
+                            }
+                            
+                            return ;
+                        }
+                        vector&lt;vector&lt;int&gt;&gt; subsets(vector&lt;int&gt;& nums) {
+                            vector&lt;int&gt; rv;
+                            vector&lt;vector&lt;int&gt;&gt; v;
+                            v.push_back(rv);
+                            Backtrack(nums,0,rv,v);
+                            return v;
+                        }
+                    };
+             </pre>
+             </div>
+
+             <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>Using Bit Manuplation.
+                    <br>000 001 010 . .. . . 111
+                    <br>so we have to check which bit are set and then we add the element at which bit is set but from 
+                    reverse set means for 001 we are adding nums[0].
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        vector&lt;vector&lt;int&gt;&gt; subsets(vector&lt;int&gt;& nums) {
+                            vector&lt;int&gt; rv;
+                            vector&lt;vector&lt;int&gt;&gt; v;
+                            int n=(1&lt;&lt;nums.size());
+                    
+                            for(int i=0;i&lt;n;i++){
+                                int k=i;
+                                int j=0;
+                                while(k){
+                                    if(k&1){
+                                        rv.push_back(nums[j]);
+                                    }
+                                    j++;
+                                    k=k&gt;&gt;1;
+                        
+                                }
+                                v.push_back(rv);
+                                rv.clear();
+                            }
+                            return v;
+                        }
+                    };
+             </pre>
+             </div>
+
+    </div>
+    </div>
+    <div id="problem-108" class="container problem-108">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 108</h2>
+                <a href="https://leetcode.com/problems/restore-ip-addresses/">Restore IP Addresses</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                      take care of leading zeros and range of numbers[0,255] and it also contain four integer<br>
+                      <a href="https://leetcode.com/problems/restore-ip-addresses/discuss/31184/Beautiful-C%2B%2B-backtracking-solution">Ref 1</a><br>
+                
+                 </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                       
+                        int conversion(string s){
+                            stringstream str(s);
+                            int x=0;
+                            str&gt;&gt;x;
+                            return x;
+                        }
+                        void Backtrack(string s,string str,int cnt,vector&lt;string&gt; &v){
+                            if(cnt==4&&s.size()&gt;3||s.size()==0)return ;
+                            
+                            if(cnt==4&&s.size()&lt;=3&&(conversion(s))&lt;=255){
+                                if(s.size()&gt;1&&s[0]=='0')return ;
+                                
+                                v.push_back(str+s);
+                                return ;
+                            }
+                       
+                            for(int i=1;i&lt;=(3&lt;s.size()?3:s.size());i++){
+                                string temp=s.substr(0,i);
+                               if(conversion(temp)&gt;255||(temp.size()&gt;1&&temp[0]=='0'))continue;
+                                
+                                
+                                Backtrack(s.substr(i),str+temp+'.',cnt+1,v);
+                                
+                            }
+                            return ;
+                        }
+                        vector&lt;string&gt; restoreIpAddresses(string s) {
+                            vector&lt;string&gt; v;
+                            Backtrack(s,"",1,v);
+                            return v;
+                        }
+                    };
+                 </pre>
+             </div>
+             
+    </div>
+    </div>
+
+    <div id="problem-109" class="container problem-109">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 109</h2>
+                <a href="https://leetcode.com/problems/split-array-into-fibonacci-sequence/">Split Array into Fibonacci Sequence</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>we have to take care of leading zeros and the size also if the number is exceed from INT_MAX value 
+                    we have to return false.
+                    F[i]+F[i+1]=F[i+2]. 
+                    if(val >res)then we do not have to continue we just return false.
+                    because every value after that would be greater . 
+                    <br>1123711
+                    <br>[1,1,2,3] at this time value is greater (2+3&lt;7) so if we continue if would be like 
+                    (2+3&lt;71) so their is no benefit to continue we can return false 
+                    <br> for leading zeros we can also return false.
+                  
+                </i>
+                </p>
+             <pre>  
+                #define ll int
+                class Solution {
+                public:
+                
+                    ll conversion(string s){
+                        stringstream str(s);
+                       ll x=0;
+                        str&gt;&gt;x;
+                        return x;
+                    }
+                    bool Backtrack(string s,vector&lt;int&gt;&v){
+                        if(s.empty()&&v.size()&gt;=3)return true;
+                        
+                        for(ll i=1;i&lt;=s.size();i++){
+                            string temp=s.substr(0,i);
+                            ll val=conversion(temp);
+                            if(val&gt;=INT_MAX)return false;
+                            
+                            if((temp.size()&gt;1&&temp[0]=='0'))return false;
+                            if(v.size()&gt;=2){
+                                long long int a=v[v.size()-1];
+                                long long int b=v[v.size()-2];
+                                long long int res=a+b;
+                                if(res&gt;=INT_MAX)return false;
+                         
+                                if(res&lt;val)return false;
+                                if(res!=val)continue;
+                                
+                            }
+                            
+                            v.push_back(val);
+                            if(Backtrack(s.substr(i),v))return true;
+                            
+                            v.pop_back();
+                
+                        }
+                        return false;
+                    }
+                    vector&lt;int&gt; splitIntoFibonacci(string S) {
+                        if(S.size()&lt;3)return {};
+                        vector&lt;int&gt; v;
+                        Backtrack(S,v);
+                       
+                        
+                        return v;
+                    }
+                };
+                 </pre>
+             </div>
+             
+    </div>
+    </div>
+
+    <div id="problem-110" class="container problem-110">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 110</h2>
+                <a href="https://leetcode.com/problems/single-number/">Single Number</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                 
+                </i>
+                </p>
+             <pre>  
+                class Solution {
+                    public:
+                        int singleNumber(vector&lt;int&gt;& nums) {
+                            int ans=nums[0];
+                            for(int i=1;i&lt;nums.size();i++){
+                                ans=ans^nums[i];
+                            }
+                            return ans;
+                        }
+                    };
+                 </pre>
+             </div>
+             
+             
+    </div>
+    </div>
+    
+    
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode23.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode25.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       
+       
+</body>
+
+</html> 
