@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CGCL</title>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+     
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top ">
+        <div class="container ">
+            <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+          
+            <div class="collapse navbar-collapse " id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+            </ul>
+            
+            </div>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color:white;" class="nav-link fa fa-sign-in btn btn-lg" href="#">Login</a> </li>
+                </ul>
+            </div>
+   
+        </div>
+       </nav>
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-6 ">
+                    <h1>CGCL</h1>
+                    <p>Begineer to Advance</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </header>
+    </div>
+     <div class="fluid-container problems sticky-top sticky-offset">
+         <div class="row">
+             <div class="col-12 col-sm-10">
+                <a style="color:white;" href="#problem-111" class="btn  btn-lg" role="button" aria-disabled="true">Single Number II</a>
+                <a style="color:white;" href="#problem-112" class="btn  btn-lg" role="button" aria-disabled="true">Maximum Product of Word Lengths</a>
+                <a style="color:white;" href="#problem-113" class="btn  btn-lg" role="button" aria-disabled="true">Reorganize String</a>
+                <a style="color:white;" href="#problem-114" class="btn  btn-lg" role="button" aria-disabled="true">Smallest Range Covering Elements from K Lists</a>
+          
+             </div>
+             
+             <div class="col-12 col-sm-2">
+                <a style="color:white;" href="./leetcode24.html" class="btn  btn-lg" role="button" aria-disabled="true">Prev</a> 
+                <a style="color:white;" href="./leetcode26.html" class="btn  btn-lg" role="button" aria-disabled="true">Next</a>    
+             </div>  
+         </div>
+
+     </div>
+     
+    <div id="problem-111" class="container problem-111">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2 >Problem 111</h2>
+                <a href="https://leetcode.com/problems/single-number-ii/">Single Number II</a><br>
+                
+            </div>
+               
+        </div>      
+        <div class="row">
+           <div class="col-12 col-sm-6">
+               <h3>Algorithm</h3>
+               <p><i>
+                <a href="https://www.youtube.com/watch?v=cOFAmaMBVps">Ref 1</a><br>
+                <a href="https://leetcode.com/problems/single-number-ii/discuss/1165580/Generic-way-to-solve-%22K-repeat-1-single%22-problems">Ref 2</a><br>
+               </i>
+               </p>
+            <pre>
+                class Solution {
+                    public:
+                        int singleNumber(vector&lt;int&gt;& nums) {
+                            int ones=0;
+                            int twos=0;
+                            for(int i=0;i&lt;nums.size();i++){
+                                ones=(ones^nums[i])&(~twos);
+                                twos=(twos^nums[i])&(~ones);
+                            }
+                            return ones;
+                        }
+                    };
+            </pre>
+            </div>
+        </div> 
+    </div>
+    <div id="problem-112" class="container problem-112">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 112</h2>
+                <a href="https://leetcode.com/problems/maximum-product-of-word-lengths/">Maximum Product of Word Lengths</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>First create a vector whose every index contain bit value of the string.
+                       <br><a href="https://leetcode.com/problems/maximum-product-of-word-lengths/discuss/1118184/
+                       C%2B%2B-or-Using-Bit-manipulation-or-with-easy-explanation">Ref 1</a><br>
+                </i>
+                </p>
+             <pre>
+                class Solution {
+                    public:
+                        int maxProduct(vector&lt;string&gt;& words) {
+                            int ans=0;
+                            vector&lt;int&gt; v;
+                            for(int i=0;i&lt;words.size();i++){
+                                int val=0;
+                                string s=words[i];
+                                for(int j=0;j&lt;s.size();j++){
+                                    int bit=s[j]-'a';
+                                    if(!((val&gt;&gt;bit)&1)){
+                                        val+=1&lt;&lt;bit;
+                                    }
+                                }
+                                v.push_back(val);
+                            }
+                            for(int i=0;i&lt;v.size()-1;i++){
+                                for(int j=i+1;j&lt;v.size();j++){
+                                    if((v[i]&v[j])==0){
+                                        ans=max(ans,(int)(words[i].size()*words[j].size()));
+                                    }
+                                }
+                            }
+                            return ans;
+                        }
+                    };
+                 </pre>
+             </div>
+             
+    </div>
+    </div>
+    <div id="problem-113" class="container problem-113">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 113</h2>
+                <a href="https://leetcode.com/problems/reorganize-string/">Reorganize String</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                    Using Heap<br>
+                    <a href="https://leetcode.com/problems/reorganize-string/discuss/972856/C%2B%2B-Priority-Queue-Hash-Map-Easy-Solution">Ref1</a><br>
+                    <a href="https://leetcode.com/problems/reorganize-string/discuss/335312/C%2B%2B-Beat-100">Ref 2</a>
+                
+                </i>
+                </p>
+             <pre>
+typedef pair&lt;int,char&gt; p;
+class Solution {
+public:
+    string reorganizeString(string S) {
+        string st="";
+        map&lt;char,int&gt; mp;
+        priority_queue&lt;p&gt; pq;
+        for(auto str:S){
+            mp[str]++;
+        }
+        for(auto itr=mp.begin();itr!=mp.end();itr++){
+            pq.push(make_pair(itr-&gt;second,itr-&gt;first));
+        }
+        while(pq.size()&gt;1){
+            auto p1=pq.top();
+            pq.pop();
+            auto p2=pq.top();
+            pq.pop();
+            st+=p1.second;
+            st+=p2.second;
+            mp[p1.second]--;
+            mp[p2.second]--;
+            if(mp[p1.second]&gt;0){
+                pq.push(make_pair(mp[p1.second],p1.second));
+            }
+            if(mp[p2.second]&gt;0){
+                pq.push(make_pair(mp[p2.second],p2.second));
+                
+            }
+        }
+        if(pq.size()&gt;0){
+            if(pq.top().first&gt;1)return "";
+            else st+=pq.top().second;
+        }
+        
+        
+        return st;
+    }
+};
+             </pre>
+             </div> 
+
+    </div>
+    </div>
+    <div id="problem-114" class="container problem-114">
+        <div class="row ">
+            <div class="col-12 col-sm-6">
+                <h2>Problem 114</h2>
+                <a href="https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/">Smallest Range Covering Elements from K Lists</a><br>
+                
+            </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3>Algorithm</h3>
+                <p><i>
+                     Using min heap<br>
+                      <a href="https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/discuss/624185/C%2B%2B-sliding-window-easy-solution">Ref 1</a><br>
+                
+                 </i>
+                </p>
+             <pre>
+typedef pair&lt;int,pair&lt;int,int&gt;&gt; p;
+
+class Solution {
+public:
+    vector&lt;int&gt; smallestRange(vector&lt;vector&lt;int&gt;&gt;& nums) {
+        //maintain two heaps one is max and another is min
+        
+        vector&lt;int&gt; v;
+        int res=INT_MAX;//for handling diff of range
+        priority_queue&lt;p,vector&lt;p&gt;,greater&lt;p&gt;&gt; min_heap;
+        int a=0,b=INT_MAX;//b is max_val because first we want it show max range 
+        int max_val=INT_MIN;//it contain maximum value so that their is no need to use max_heap
+        for(int i=0;i&lt;nums.size();i++){
+            
+            min_heap.push(make_pair(nums[i][0],make_pair(i,0)));
+            if(max_val&lt;nums[i][0])max_val=nums[i][0];
+        }
+        while(min_heap.size()&gt;=nums.size()){
+            auto pt=min_heap.top();
+            min_heap.pop();
+             
+            
+            res=max_val-pt.first;
+            if((max_val!=INT_MIN)&&(b-a)&gt;(res)){
+                a=pt.first;
+                b=max_val;
+            }
+            else if(((b-a)==res)&&(a&gt;(pt.first))){//work when range is equal
+                a=pt.first;
+                b=max_val;
+            }
+            int i=pt.second.first;
+            int j=pt.second.second;
+            if(j+1&lt;nums[i].size()){//next element of the array whose minimum is taken
+                max_val=max(max_val,nums[i][j+1]);
+                min_heap.push(make_pair(nums[i][j+1],make_pair(i,j+1)));
+            }
+            
+            
+        }
+        v.push_back(a);
+        v.push_back(b);
+        return v;
+    }
+};
+                 </pre>
+             </div>
+             
+    </div>
+    </div>
+
+      <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode24.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">prev</a>
+            </div>
+            <div class="col-3 col-sm-2">
+               <a href="./leetcode26.html" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Next</a>
+            </div>
+           
+        </div>
+   </div>
+
+
+    <footer>
+        <div class="container-fluid footer">
+            <div class="row ">             
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">GeeksforGeeks</a></li>
+                        <li><a href="#">codeforces</a></li>
+                        <li><a href="#">Leetcode</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-google-plus fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    </div>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div clas="col-auto">
+                    <p>© Copyright 2021 CGCL</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+       <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+       <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+       <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       <script src="./Dom/app.js"></script>
+       
+</body>
+
+</html> 

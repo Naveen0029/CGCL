@@ -256,15 +256,10 @@
                         ListNode* mergeKLists(vector&lt;ListNode*&gt;& lists) {
                             if(lists.size()==0)return {};
                             if(lists.size()==1)return lists[0];
-                            
-                            
-                           
-                            
+        
                             int j=1;
                             int l=lists.size();
-                            while(j&lt;l){
-                                
-                               
+                            while(j&lt;l){  
                                 int i=0;
                                 while(i&lt;(lists.size()-j)){
                                ListNode* head=new ListNode(0);
@@ -473,7 +468,7 @@
        <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
        <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-       
+       <script src="./Dom/app.js"></script>
        
 </body>
 
