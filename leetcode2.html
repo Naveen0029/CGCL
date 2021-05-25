@@ -11,6 +11,8 @@
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
       <link rel="stylesheet" href="./styles.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
      
 </head>
 
@@ -23,12 +25,12 @@
            
 
             <div class="collapse navbar-collapse " id="Navbar">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
-                <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
-                <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
-                <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
-            </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a class="nav-link" href="./gfg.html">Home</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="#">codechef</a> </li>
+                    <li class="nav-item"><a class="nav-link" href="#">codeforces</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./leetcode.html">Leetcode</a> </li>
+                </ul>
             </div>
    
         </div>
@@ -331,32 +333,32 @@
                 </p>
              <pre>
                 class Solution {
-                    public:
-                        void traverse(TreeNode  *root,map&lt;int,vector&lt;pair&lt;int,int&gt;&gt;&gt; &mp,int index,int level){
-                            if(root==NULL)return ;
-                            
-                            mp[index].push_back({level,root-&gt;val});
-                            traverse(root-&gt;left,mp,index-1,level+1);
-                            traverse(root-&gt;right,mp,index+1,level+1);
-                            return ;
-                        }
-                        vector&lt;vector&lt;int&gt;&gt; verticalTraversal(TreeNode* root) {
-                            if(root==NULL)return {{}};
-                            vector&lt;vector&lt;int&gt;&gt; vec;
-                            vector&lt;int&gt; v;
-                            map&lt;int,vector&lt;pair&lt;int,int&gt;&gt;&gt; mp;
-                            traverse(root,mp,0,0);
-                            for(auto itr=mp.begin();itr!=mp.end();itr++){
-                               sort(itr-&gt;second.begin(),itr-&gt;second.end());
-                               for(auto it=itr-&gt;second.begin();it!=itr-&gt;second.end();it++){
-                                   v.push_back(it-&gt;second);
-                               }
-                                vec.push_back(v);
-                                v.clear();
-                            }
-                            return vec;
-                        }
-                    };
+                public:
+                void traverse(TreeNode *root,map&lt;int,vector&lt;pair&lt;int,int&gt;&gt;&gt; &mp,int index,int level){
+                if(root==NULL)return ;
+                
+                mp[index].push_back({level,root-&gt;val});
+                traverse(root-&gt;left,mp,index-1,level+1);
+                traverse(root-&gt;right,mp,index+1,level+1);
+                return ;
+                }
+                vector&lt;vector&lt;int&gt;&gt; verticalTraversal(TreeNode* root) {
+                if(root==NULL)return {{}};
+                vector&lt;vector&lt;int&gt;&gt; vec;
+                vector&lt;int&gt; v;
+                map&lt;int,vector&lt;pair&lt;int,int&gt;&gt;&gt; mp;
+                traverse(root,mp,0,0);
+                for(auto itr=mp.begin();itr!=mp.end();itr++){
+                sort(itr-&gt;second.begin(),itr-&gt;second.end());
+                for(auto it=itr-&gt;second.begin();it!=itr-&gt;second.end();it++){
+                v.push_back(it-&gt;second);
+                }
+                vec.push_back(v);
+                v.clear();
+                }
+                return vec;
+                }
+                };
                  </pre>
              </div>
              </div>
