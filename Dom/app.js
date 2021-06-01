@@ -1,4 +1,4 @@
-
+var Trie=require('./trie');
 
 //for changing ml to mr
 let elem=document.querySelector('.navbar-nav');
@@ -44,7 +44,7 @@ ch.insertAdjacentHTML('beforeend',change);
 //adding search bar
 
 var search=document.getElementById('Navbar').firstElementChild;
-var text='&nbsp;&nbsp;<li> <div class="input-group"><input class="form-control border-end-0 border rounded-pill" type="search" value="search" id="example-search-input"><span class="input-group-append"><button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button"><i class="fa fa-search"></i></button></span></div></li>'
+var text='&nbsp;&nbsp;  <li> <div class="input-group"><input class="form-control border-end-0 border rounded-pill" type="search" value="search" id="example-search-input"><span class="input-group-append"><button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button"><i class="fa fa-search"></i></button></span></div></li>'
 search.insertAdjacentHTML('beforeend',text);
 /*   <div class="input-group">
                 <input class="form-control border-end-0 border rounded-pill" type="search" value="search" id="example-search-input">
@@ -69,4 +69,11 @@ linki2.rel="stylesheet";
 linki2.href="node_modules/bootstrap-social/bootstrap-social.css";
 document.body.appendChild(linki1);
 document.body.appendChild(linki2);//dont know how it is working
+
+//implementing search bar
+const searchBar=document.getElementById("example-search-input");
+searchBar.addEventListener("keyup",e=>{
+    console.log(Triee.find(searchBar.value));
+    
+});
 
