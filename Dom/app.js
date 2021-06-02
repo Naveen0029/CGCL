@@ -1,4 +1,4 @@
-var Trie=require('./trie');
+//var Trie=require('./trie');
 
 //for changing ml to mr
 let elem=document.querySelector('.navbar-nav');
@@ -71,9 +71,9 @@ document.body.appendChild(linki1);
 document.body.appendChild(linki2);//dont know how it is working
 
 //implementing search bar
-const searchBar=document.getElementById("example-search-input");
+/*const searchBar=document.getElementById("example-search-input");
 searchBar.addEventListener("keyup",e=>{
     console.log(Triee.find(searchBar.value));
     
-});
+});*/
 
