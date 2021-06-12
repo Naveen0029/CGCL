@@ -62,7 +62,10 @@ function findAllWords(node,arr){
        findAllWords(node.children[child],arr);
    }
 }
-var Triee=new Trie();
-Triee.insert("naveen");
 
-module.exports=Triee;
+
+
+
+module.exports.Triee=new Trie();
+
+
